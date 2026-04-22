@@ -739,6 +739,7 @@
         <div class="sidebar-item" onclick="showSection('k-invoices')"><span class="icon">🧾</span>Arved <span class="sidebar-badge">2</span></div>
         <div class="sidebar-item" onclick="showSection('k-recommend')"><span class="icon">⭐</span>Soovitajad</div>
         <div class="sidebar-item" onclick="showSection('k-rent')"><span class="icon">🔧</span>Seadmete rent</div>
+        <div class="sidebar-item" onclick="showSection('k-autorent')"><span class="icon">🚗</span>Autorent</div>
         <div class="sidebar-item" onclick="showSection('k-training')"><span class="icon">🎓</span>Koolitused</div>
         <div class="sidebar-item" onclick="showSection('k-blog')"><span class="icon">📰</span>Blogi</div>
         <div class="sidebar-item" onclick="showSection('k-account')"><span class="icon">⚙️</span>Minu konto</div>
@@ -1064,6 +1065,175 @@
         </div>
       </section>
 
+      <!-- ── AUTO RENT ── -->
+      <section id="k-autorent" style="display:none;">
+        <h2 class="content-title serif">🚗 Autorent</h2>
+        <p class="content-sub">Rendi auto või mopeedauto kiiresti — leping kohe digitaalselt</p>
+
+        <!-- Step 1: Vali kategooria -->
+        <div id="autorent-step-1">
+          <div class="card-title" style="margin-bottom:16px;">1️⃣ Vali sõiduki tüüp</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;">
+
+            <!-- Sõiduauto B-kategooria -->
+            <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;" onclick="valiAutoTyyp('b')">
+              <div style="font-size:48px;margin-bottom:12px;">🚙</div>
+              <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--forest);margin-bottom:6px;">Sõiduauto (B-kategooria)</div>
+              <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Tavaline sõiduauto kuni 9 inimesele</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+                <span class="badge badge-blue">Vaja B-kat. juhiluba</span>
+                <span class="badge badge-green">Alates 25€/päev</span>
+              </div>
+              <button class="btn btn-primary btn-sm">Vali sõiduauto →</button>
+            </div>
+
+            <!-- Mopeedauto -->
+            <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;" onclick="valiAutoTyyp('mopeedauto')">
+              <div style="font-size:48px;margin-bottom:12px;">🚗</div>
+              <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--forest);margin-bottom:6px;">Mopeedauto</div>
+              <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Microcar, Aixam, Ligier — sõiduki max 45 km/h</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+                <span class="badge badge-yellow">Sõltub sünniaastast</span>
+                <span class="badge badge-green">Alates 18€/päev</span>
+              </div>
+              <button class="btn btn-primary btn-sm">Vali mopeedauto →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2A: Sõiduauto valiku tulemus -->
+        <div id="autorent-step-b" style="display:none;">
+          <button class="btn btn-outline btn-sm" onclick="resetAutorent()" style="margin-bottom:16px;">← Tagasi</button>
+          <div class="card">
+            <div class="card-title">🚙 Sõiduauto B-kategooria</div>
+            <div style="background:rgba(46,139,110,0.08);border-radius:10px;padding:14px;margin-bottom:16px;font-size:13px;color:var(--text-mid);">
+              ✅ Vajalik B-kategooria juhiluba (kõigil tavalistel autojuhtidel olemas)
+            </div>
+            <div id="auto-b-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;"></div>
+          </div>
+        </div>
+
+        <!-- Step 2B: Mopeedauto - sünniaasta küsimus -->
+        <div id="autorent-step-moped-aasta" style="display:none;">
+          <button class="btn btn-outline btn-sm" onclick="resetAutorent()" style="margin-bottom:16px;">← Tagasi</button>
+          <div class="card" style="max-width:520px;">
+            <div class="card-title">📅 Sinu sünniaasta?</div>
+            <p style="font-size:13px;color:var(--text-mid);margin-bottom:16px;">
+              Mopeedauto sõitmise nõuded sõltuvad sünniaastast — uurime ühe küsimusega ära.
+            </p>
+            <div class="input-group">
+              <label class="input-label">Sünniaasta</label>
+              <input class="input-field" type="number" id="moped-aasta" placeholder="nt. 1990" min="1940" max="2010" style="font-size:18px;font-weight:700;">
+            </div>
+            <button class="btn btn-primary btn-full" onclick="kontrolliAastat()">Kontrolli →</button>
+          </div>
+        </div>
+
+        <!-- Step 3A: Sünniaasta < 1993 — võib ilma lubadeta -->
+        <div id="autorent-step-vaba" style="display:none;">
+          <button class="btn btn-outline btn-sm" onclick="resetAutorent()" style="margin-bottom:16px;">← Tagasi</button>
+          <div class="card" style="background:linear-gradient(135deg,rgba(46,139,110,0.1),rgba(46,139,110,0.05));border:1px solid rgba(46,139,110,0.3);">
+            <div style="font-size:48px;margin-bottom:12px;">✅</div>
+            <div class="card-title" style="color:var(--forest);">Suurepärane! Sa võid mopeedautoga sõita ilma juhilubadeta.</div>
+            <p style="font-size:13px;color:var(--text-mid);margin-bottom:16px;">
+              Enne 1. jaanuari 1993 sündinud isikutel pole mopeedauto juhtimiseks luba vaja.
+              Vali endale sobiv sõiduk allpool!
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-title">🚗 Saadaval mopeedautod</div>
+            <div id="moped-auto-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;"></div>
+          </div>
+        </div>
+
+        <!-- Step 3B: Sünniaasta >= 1993 — vajab AM-luba -->
+        <div id="autorent-step-vajab-luba" style="display:none;">
+          <button class="btn btn-outline btn-sm" onclick="resetAutorent()" style="margin-bottom:16px;">← Tagasi</button>
+          <div class="card" style="background:linear-gradient(135deg,rgba(192,122,26,0.1),rgba(192,122,26,0.05));border:1px solid rgba(192,122,26,0.3);">
+            <div style="font-size:48px;margin-bottom:12px;">📋</div>
+            <div class="card-title" style="color:#C07A1A;">Sul on vaja AM-kategooria juhiluba</div>
+            <p style="font-size:13px;color:var(--text-mid);margin-bottom:16px;">
+              Pärast 1993. aastat sündinud isikutel on mopeedauto juhtimiseks vajalik AM-kategooria luba.
+            </p>
+            <div class="input-group">
+              <label class="input-label">Kas sul on AM-kategooria luba?</label>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <button class="btn btn-primary" onclick="vastaAmLuba(true)">✅ Jah, on luba</button>
+                <button class="btn btn-outline" onclick="vastaAmLuba(false)">❌ Ei, pole luba</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4A: Tal on AM luba -->
+        <div id="autorent-step-am-on" style="display:none;">
+          <button class="btn btn-outline btn-sm" onclick="resetAutorent()" style="margin-bottom:16px;">← Tagasi</button>
+          <div class="card" style="background:linear-gradient(135deg,rgba(46,139,110,0.1),rgba(46,139,110,0.05));border:1px solid rgba(46,139,110,0.3);">
+            <div style="font-size:48px;margin-bottom:12px;">✅</div>
+            <div class="card-title" style="color:var(--forest);">Suurepärane! Saad mopeedautoga sõita.</div>
+          </div>
+          <div class="card">
+            <div class="card-title">🚗 Saadaval mopeedautod</div>
+            <div id="moped-auto-list-2" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;"></div>
+          </div>
+        </div>
+
+        <!-- Step 4B: Pole AM luba — paku koolitust -->
+        <div id="autorent-step-koolitus" style="display:none;">
+          <button class="btn btn-outline btn-sm" onclick="resetAutorent()" style="margin-bottom:16px;">← Tagasi</button>
+
+          <div class="card" style="background:linear-gradient(135deg,rgba(26,51,38,0.05),rgba(92,138,110,0.08));border:1px solid var(--sage);">
+            <div style="font-size:48px;margin-bottom:12px;">🎓</div>
+            <div class="card-title" style="color:var(--forest);font-size:22px;">Kodo soovitab: Õnneleidu Autokool</div>
+            <p style="font-size:14px;color:var(--text-mid);margin-bottom:16px;line-height:1.7;">
+              Õnneleidu Autokool on Kodo partner — kvaliteetne AM-kategooria koolitus
+              ja kohe pärast lubade saamist saad meie autorendi <strong>20% soodsamalt</strong>!
+            </p>
+
+            <div style="background:var(--cream);border-radius:12px;padding:16px;margin-bottom:16px;">
+              <div style="font-weight:700;color:var(--forest);margin-bottom:10px;">📚 AM-kategooria koolituse pakett:</div>
+              <ul style="list-style:none;padding:0;margin:0;font-size:13px;color:var(--text-mid);line-height:2;">
+                <li>✅ Teooriaõpe (12 tundi)</li>
+                <li>✅ Sõidutunnid (10 tundi)</li>
+                <li>✅ Esmaabikursus (8 tundi)</li>
+                <li>✅ Eksami ettevalmistus</li>
+                <li>✅ Õppematerjalid kaasas</li>
+              </ul>
+            </div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#1A3326,#2A5240);color:#fff;padding:16px;border-radius:12px;margin-bottom:16px;">
+              <div>
+                <div style="font-size:11px;opacity:0.8;text-transform:uppercase;letter-spacing:1px;">Tavaline hind</div>
+                <div style="font-size:14px;text-decoration:line-through;opacity:0.7;">450€</div>
+                <div style="font-size:24px;font-family:'Playfair Display',serif;color:var(--gold-light);">399€ Kodo kaudu</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="background:var(--gold);color:var(--forest);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;">⭐ KODO BOONUS</div>
+                <div style="font-size:11px;opacity:0.8;margin-top:6px;">+20% autorendi soodustus</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <a href="https://onneleid.ee" target="_blank" class="btn btn-primary" style="flex:1;min-width:200px;">
+                🎓 Registreeri koolitusele →
+              </a>
+              <button class="btn btn-outline" onclick="kysiKoolituseInfo()">Küsi rohkem infot</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:16px;">
+            <div style="font-weight:700;color:var(--forest);margin-bottom:10px;">💡 Mis on AM-kategooria?</div>
+            <p style="font-size:13px;color:var(--text-mid);line-height:1.7;">
+              AM-kategooria luba lubab juhtida kuni 45 km/h sõitvaid sõidukeid — mopeedautosid
+              ja mopeede. See on Eesti kõige odavam ja lihtsam autokool — saadakse umbes 1 kuuga.
+              Kui sul on autoluba (B), pole AM-luba enam vaja eraldi.
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+
       <!-- K: TRAINING -->
       <section id="k-training" style="display:none;">
         <h2 class="content-title serif">🎓 Online koolitused</h2>
@@ -1131,7 +1301,7 @@
         <div id="become-cleaner-promo" style="margin-top:20px;background:linear-gradient(135deg,var(--forest),var(--forest-mid));border-radius:16px;padding:24px;color:var(--cream);display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
           <div style="font-size:40px;">🧹</div>
           <div style="flex:1;">
-            <div style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:4px;">Taha teenusepakkujaks hakata?</div>
+            <div style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:4px;">Soovid teenusepakkujaks hakata?</div>
             <div style="font-size:13px;color:var(--mint);line-height:1.5;">Sama konto — lisa tegija vaade. Näed kõiki broneeringuid, halda arveid ja võta töid vastu.</div>
           </div>
           <div style="text-align:center;flex-shrink:0;">
@@ -2205,7 +2375,7 @@ function showDualRolePromo() {
   banner.innerHTML = `
     <span style="font-size:40px;">🧹</span>
     <div style="flex:1;">
-      <div style="font-family:'Playfair Display',serif;font-size:18px;color:#F5F0E8;margin-bottom:4px;">Taha ka teenusepakkujaks hakata?</div>
+      <div style="font-family:'Playfair Display',serif;font-size:18px;color:#F5F0E8;margin-bottom:4px;">Soovid ka teenusepakkujaks hakata?</div>
       <div style="font-size:13px;color:#A8D5BA;line-height:1.5;">Ava tegija vaade ja hakka pakkuma teenuseid — sama konto, topelt võimalused.</div>
     </div>
     <button onclick="activateDualRole()" class="btn btn-gold" style="flex-shrink:0;">Aktiveeri tegija vaade →</button>
@@ -3456,6 +3626,107 @@ function activateCleanerSubscription() {
 
   showToast('🎉 Tegija vaade aktiveeritud!', '9€/kuu · vahetad päise nupuga');
   setTimeout(() => switchActiveRole('tegija'), 900);
+}
+
+
+
+// ── AUTORENT FUNKTSIONAALSUS ──
+function valiAutoTyyp(tyyp) {
+  document.getElementById('autorent-step-1').style.display = 'none';
+  if (tyyp === 'b') {
+    document.getElementById('autorent-step-b').style.display = 'block';
+    renderAutoBList();
+  } else {
+    document.getElementById('autorent-step-moped-aasta').style.display = 'block';
+  }
+}
+
+function resetAutorent() {
+  ['autorent-step-1','autorent-step-b','autorent-step-moped-aasta',
+   'autorent-step-vaba','autorent-step-vajab-luba','autorent-step-am-on',
+   'autorent-step-koolitus'].forEach(id => {
+    var el = document.getElementById(id);
+    if (el) el.style.display = id === 'autorent-step-1' ? 'block' : 'none';
+  });
+  var aastaEl = document.getElementById('moped-aasta');
+  if (aastaEl) aastaEl.value = '';
+}
+
+function kontrolliAastat() {
+  var aastaEl = document.getElementById('moped-aasta');
+  var aasta = parseInt(aastaEl.value);
+  if (!aasta || aasta < 1940 || aasta > 2010) {
+    alert('Sisesta korrektne sünniaasta (1940-2010)');
+    return;
+  }
+  document.getElementById('autorent-step-moped-aasta').style.display = 'none';
+  if (aasta < 1993) {
+    document.getElementById('autorent-step-vaba').style.display = 'block';
+    renderMopedList('moped-auto-list');
+  } else {
+    document.getElementById('autorent-step-vajab-luba').style.display = 'block';
+  }
+}
+
+function vastaAmLuba(onLuba) {
+  document.getElementById('autorent-step-vajab-luba').style.display = 'none';
+  if (onLuba) {
+    document.getElementById('autorent-step-am-on').style.display = 'block';
+    renderMopedList('moped-auto-list-2');
+  } else {
+    document.getElementById('autorent-step-koolitus').style.display = 'block';
+  }
+}
+
+function renderAutoBList() {
+  var autod = [
+    {nimi:'Toyota Corolla', aasta:2022, hind:35, kytus:'Bensiin', emoji:'🚙'},
+    {nimi:'VW Golf', aasta:2023, hind:42, kytus:'Bensiin', emoji:'🚗'},
+    {nimi:'Skoda Octavia', aasta:2021, hind:38, kytus:'Diisel', emoji:'🚙'},
+    {nimi:'Tesla Model 3', aasta:2024, hind:65, kytus:'Elekter', emoji:'⚡'},
+    {nimi:'Renault Clio', aasta:2022, hind:28, kytus:'Bensiin', emoji:'🚗'},
+    {nimi:'Opel Astra', aasta:2023, hind:32, kytus:'Bensiin', emoji:'🚙'},
+  ];
+  var html = autod.map(function(a) {
+    return '<div class="card" style="padding:14px;margin:0;">' +
+      '<div style="font-size:36px;text-align:center;margin-bottom:8px;">' + a.emoji + '</div>' +
+      '<div style="font-weight:700;color:var(--forest);">' + a.nimi + '</div>' +
+      '<div style="font-size:12px;color:var(--text-light);margin-bottom:8px;">' + a.aasta + ' · ' + a.kytus + '</div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+        '<div style="font-family:Playfair Display,serif;font-size:18px;color:var(--forest);">' + a.hind + '€/päev</div>' +
+        '<button class="btn btn-primary btn-sm" onclick="bookAuto(\'' + a.nimi + '\',' + a.hind + ')">Rendi</button>' +
+      '</div></div>';
+  }).join('');
+  document.getElementById('auto-b-list').innerHTML = html;
+}
+
+function renderMopedList(targetId) {
+  var mopedid = [
+    {nimi:'Aixam City', aasta:2022, hind:22, emoji:'🚗'},
+    {nimi:'Microcar M.Go', aasta:2023, hind:25, emoji:'🚙'},
+    {nimi:'Ligier JS50', aasta:2022, hind:24, emoji:'🚗'},
+    {nimi:'Aixam Crossline', aasta:2024, hind:28, emoji:'🚙'},
+  ];
+  var html = mopedid.map(function(a) {
+    return '<div class="card" style="padding:14px;margin:0;">' +
+      '<div style="font-size:36px;text-align:center;margin-bottom:8px;">' + a.emoji + '</div>' +
+      '<div style="font-weight:700;color:var(--forest);">' + a.nimi + '</div>' +
+      '<div style="font-size:12px;color:var(--text-light);margin-bottom:8px;">' + a.aasta + ' · max 45 km/h</div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+        '<div style="font-family:Playfair Display,serif;font-size:18px;color:var(--forest);">' + a.hind + '€/päev</div>' +
+        '<button class="btn btn-primary btn-sm" onclick="bookAuto(\'' + a.nimi + '\',' + a.hind + ')">Rendi</button>' +
+      '</div></div>';
+  }).join('');
+  var el = document.getElementById(targetId);
+  if (el) el.innerHTML = html;
+}
+
+function bookAuto(nimi, hind) {
+  alert('🚗 Broneerimine: ' + nimi + ' (' + hind + '€/päev)\n\nRendileping luuakse automaatselt — Smart-ID allkirjastamine järgmises sammus.');
+}
+
+function kysiKoolituseInfo() {
+  alert('📚 Õnneleidu Autokool võtab sinuga ühendust 24h jooksul.\n\nKodo edastab kontaktandmed automaatselt.');
 }
 
 </script>
