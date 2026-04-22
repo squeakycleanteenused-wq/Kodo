@@ -740,6 +740,7 @@
         <div class="sidebar-item" onclick="showSection('k-recommend')"><span class="icon">⭐</span>Soovitajad</div>
         <div class="sidebar-item" onclick="showSection('k-rent')"><span class="icon">🔧</span>Seadmete rent</div>
         <div class="sidebar-item" onclick="showSection('k-autorent')"><span class="icon">🚗</span>Autorent</div>
+        <div class="sidebar-item" onclick="showSection('k-autopesu')"><span class="icon">🧽</span>Auto pesu</div>
         <div class="sidebar-item" onclick="showSection('k-training')"><span class="icon">🎓</span>Koolitused</div>
         <div class="sidebar-item" onclick="showSection('k-blog')"><span class="icon">📰</span>Blogi</div>
         <div class="sidebar-item" onclick="showSection('k-account')"><span class="icon">⚙️</span>Minu konto</div>
@@ -1072,16 +1073,13 @@
 
         <!-- Step 1: Vali kategooria -->
         <div id="autorent-step-1">
-          <div class="card-title" style="margin-bottom:16px;">Mida soovid teha?</div>
-
-          <!-- Renting cars -->
-          <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--forest);margin-bottom:12px;">🚗 Rendi sõiduk</h3>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:32px;">
+          <div class="card-title" style="margin-bottom:16px;">Vali sõiduki tüüp</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;">
 
             <!-- Sõiduauto B-kategooria -->
             <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;margin:0;" onclick="valiAutoTyyp('b')">
-              <div style="font-size:42px;margin-bottom:10px;">🚙</div>
-              <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--forest);margin-bottom:6px;">Sõiduauto (B-kategooria)</div>
+              <div style="font-size:48px;margin-bottom:12px;">🚙</div>
+              <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--forest);margin-bottom:6px;">Sõiduauto (B-kategooria)</div>
               <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Tavaline sõiduauto kuni 9 inimesele</div>
               <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
                 <span class="badge badge-blue">B-luba + Veriff</span>
@@ -1092,49 +1090,14 @@
 
             <!-- Mopeedauto -->
             <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;margin:0;" onclick="valiAutoTyyp('mopeedauto')">
-              <div style="font-size:42px;margin-bottom:10px;">🚗</div>
-              <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--forest);margin-bottom:6px;">Mopeedauto</div>
+              <div style="font-size:48px;margin-bottom:12px;">🚗</div>
+              <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--forest);margin-bottom:6px;">Mopeedauto</div>
               <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Microcar, Aixam, Ligier — max 45 km/h</div>
               <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
                 <span class="badge badge-yellow">Sõltub sünniaastast</span>
                 <span class="badge badge-green">Alates 18€/päev</span>
               </div>
               <button class="btn btn-primary btn-sm">Vali mopeedauto →</button>
-            </div>
-          </div>
-
-          <!-- Car wash -->
-          <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--forest);margin-bottom:12px;">🧽 Broneeri auto pesu</h3>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
-
-            <!-- Välispesu -->
-            <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;margin:0;" onclick="valiPesu('valispesu')">
-              <div style="font-size:42px;margin-bottom:10px;">💦</div>
-              <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--forest);margin-bottom:6px;">Välispesu</div>
-              <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Auto välispind, vahud, vööd, kuivatus</div>
-              <span class="badge badge-green">Alates 12€</span>
-              <div style="margin-top:10px;"><button class="btn btn-primary btn-sm">Vali välispesu →</button></div>
-            </div>
-
-            <!-- Sisepesu -->
-            <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;margin:0;" onclick="valiPesu('sisepesu')">
-              <div style="font-size:42px;margin-bottom:10px;">🪑</div>
-              <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--forest);margin-bottom:6px;">Sisepesu</div>
-              <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Salongi tolmuimemine, mati, paneelid</div>
-              <span class="badge badge-green">Alates 18€</span>
-              <div style="margin-top:10px;"><button class="btn btn-primary btn-sm">Vali sisepesu →</button></div>
-            </div>
-
-            <!-- Komplekt -->
-            <div class="card" style="cursor:pointer;border:2px solid var(--accent,#C9A84C);transition:all 0.2s;margin:0;background:linear-gradient(135deg,rgba(201,168,76,0.05),rgba(201,168,76,0.02));" onclick="valiPesu('koos')">
-              <div style="font-size:42px;margin-bottom:10px;">✨</div>
-              <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--forest);margin-bottom:6px;">Sise + Välispesu</div>
-              <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Täielik puhastus — sisemus + välimus</div>
-              <div style="display:flex;gap:6px;align-items:center;">
-                <span class="badge badge-gold" style="background:#C9A84C;color:var(--forest);">⭐ Soodne</span>
-                <span class="badge badge-green">Alates 25€</span>
-              </div>
-              <div style="margin-top:10px;"><button class="btn btn-primary btn-sm">Vali komplekt →</button></div>
             </div>
           </div>
         </div>
@@ -1292,18 +1255,25 @@
           <button class="btn btn-outline btn-sm" onclick="resetAutorent()" style="margin-bottom:16px;">← Tagasi</button>
           <div class="card" style="background:linear-gradient(135deg,rgba(192,122,26,0.1),rgba(192,122,26,0.05));border:1px solid rgba(192,122,26,0.3);">
             <div style="font-size:48px;margin-bottom:12px;">📋</div>
-            <div class="card-title" style="color:#C07A1A;">Sul on vaja AM-kategooria juhiluba</div>
-            <p style="font-size:13px;color:var(--text-mid);margin-bottom:8px;">
-              <strong>Eesti seadus:</strong> Pärast <strong>1. jaanuari 1993</strong> sündinud isikutel on mopeedauto (max 45 km/h) juhtimiseks vajalik AM-kategooria juhiluba.
+            <div class="card-title" style="color:#C07A1A;">Sul on vaja juhiluba</div>
+            <p style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">
+              <strong>Eesti seadus:</strong> Pärast <strong>1. jaanuari 1993</strong> sündinud isikutel on mopeedauto (max 45 km/h) juhtimiseks vajalik juhiluba.
             </p>
-            <p style="font-size:12px;color:var(--text-light);margin-bottom:16px;">
-              ℹ️ Kui sul on B-kategooria juhiluba, saad mopeedautot sõita ka ilma eraldi AM-kategooriata.
-            </p>
+
+            <div style="background:rgba(46,139,110,0.08);border:1px solid rgba(46,139,110,0.2);border-radius:10px;padding:14px;font-size:12px;color:var(--text-mid);margin-bottom:16px;line-height:1.7;">
+              ✅ <strong>Sobivad load:</strong>
+              <ul style="margin:6px 0 0 18px;padding:0;">
+                <li><strong>AM-kategooria</strong> — mopeedi/mopeedauto luba</li>
+                <li><strong>B-kategooria</strong> — autoluba (katab automaatselt mopeedauto)</li>
+                <li>Igasugune muu mootorsõiduki juhtimisõigus</li>
+              </ul>
+            </div>
+
             <div class="input-group">
-              <label class="input-label">Kas sul on AM- või B-kategooria juhiluba?</label>
+              <label class="input-label">Kas sul on mõni neist juhilubadest?</label>
               <div style="display:flex;gap:10px;flex-wrap:wrap;">
                 <button class="btn btn-primary" onclick="vastaAmLuba(true)">✅ Jah, on luba</button>
-                <button class="btn btn-outline" onclick="vastaAmLuba(false)">❌ Ei, pole luba</button>
+                <button class="btn btn-outline" onclick="vastaAmLuba(false)">❌ Ei, pole ühtegi luba</button>
               </div>
             </div>
           </div>
@@ -1315,12 +1285,81 @@
           <div class="card" style="background:linear-gradient(135deg,rgba(46,139,110,0.1),rgba(46,139,110,0.05));border:1px solid rgba(46,139,110,0.3);">
             <div style="font-size:48px;margin-bottom:12px;">✅</div>
             <div class="card-title" style="color:var(--forest);">Suurepärane! Saad mopeedautoga sõita.</div>
+            <p style="font-size:13px;color:var(--text-mid);">
+              💡 NB! Sõiduki rentimisel peab kaasas olema isikut tõendav dokument ja kehtiv juhiluba.
+            </p>
           </div>
           <div class="card">
             <div class="card-title">🚗 Saadaval mopeedautod</div>
             <div id="moped-auto-list-2" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;"></div>
           </div>
         </div>
+
+        <!-- Step 5: BRONEERINGU KINNITUS (deposiit + pesu valik) -->
+        <div id="autorent-step-broneering" style="display:none;">
+          <button class="btn btn-outline btn-sm" onclick="resetAutorent()" style="margin-bottom:16px;">← Tagasi autode juurde</button>
+
+          <div class="card">
+            <div class="card-title">📋 Broneeringu kinnitus</div>
+            <div style="font-size:14px;color:var(--text-mid);margin-bottom:16px;">
+              Sõiduk: <strong id="br-auto-nimi" style="color:var(--forest);">—</strong>
+            </div>
+
+            <div class="input-group">
+              <label class="input-label">Mitu päeva?</label>
+              <input class="input-field" type="number" id="br-paevi" value="1" min="1" max="30" onchange="uuendaBroneering()" oninput="uuendaBroneering()" style="font-size:18px;font-weight:700;">
+            </div>
+
+            <!-- PESU VALIK BANNER -->
+            <div style="background:linear-gradient(135deg,rgba(46,139,110,0.08),rgba(46,139,110,0.03));border:1px solid rgba(46,139,110,0.3);border-radius:12px;padding:16px;margin:16px 0;">
+              <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;">
+                <input type="checkbox" id="br-pesu-checkbox" onchange="uuendaBroneering()" style="width:22px;height:22px;flex-shrink:0;margin-top:2px;accent-color:var(--forest);">
+                <div style="flex:1;">
+                  <div style="font-weight:700;color:var(--forest);font-size:15px;margin-bottom:4px;">
+                    🧽 Las Kodo organiseerib auto pesu (+25€)
+                  </div>
+                  <div style="font-size:12px;color:var(--text-mid);line-height:1.6;">
+                    Pesu broneeritakse automaatselt sinu auto tagastuspäevale.
+                    <strong>Deposiiti ei pea maksma</strong>, sest auto saab kindlalt puhtaks!
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            <!-- Hinnakirja kokkuvõte -->
+            <div style="background:var(--cream);border-radius:12px;padding:16px;margin:16px 0;">
+              <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:13px;color:var(--text-mid);">
+                <span>Auto rent (<span id="br-rent-paevad">1 päev × 25€</span>)</span>
+                <strong id="br-rent">25.00€</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:13px;color:var(--text-mid);border-top:1px solid var(--border);">
+                <span>Auto pesu (valikuline)</span>
+                <strong id="br-pesu">0.00€</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:13px;color:var(--text-mid);border-top:1px solid var(--border);">
+                <span>Kodo platvormi tasu (8%)</span>
+                <strong id="br-komisjon">2.00€</strong>
+              </div>
+              <div id="br-deposiit-row" style="display:flex;justify-content:space-between;padding:8px 0;font-size:13px;color:var(--text-mid);border-top:1px solid var(--border);">
+                <span>Tagatisraha (deposiit)</span>
+                <strong id="br-deposiit">50.00€</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:14px 0 0;font-size:16px;color:var(--forest);border-top:2px solid var(--forest);margin-top:8px;font-weight:700;">
+                <span>Maksta kokku</span>
+                <strong style="font-family:Playfair Display,serif;font-size:24px;" id="br-kokku">77.00€</strong>
+              </div>
+            </div>
+
+            <div id="br-deposiit-info" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:12px 14px;font-size:12px;color:#856404;margin-bottom:16px;line-height:1.7;">
+              💡 Tagasta auto puhtana ja saad <strong>50€ deposiidi tagasi</strong>. Mustana tagastades deposiit kaotatakse.
+            </div>
+
+            <button class="btn btn-primary btn-full" onclick="kinnitaBroneering()" style="padding:14px;font-size:15px;">
+              ✅ Kinnitan broneeringu
+            </button>
+          </div>
+        </div>
+
 
         <!-- Step 4B: Pole AM luba — paku koolitust -->
         <div id="autorent-step-koolitus" style="display:none;">
@@ -1330,83 +1369,185 @@
             <div style="font-size:48px;margin-bottom:12px;">🎓</div>
             <div class="card-title" style="color:var(--forest);font-size:22px;">Kodo soovitab: Õnneleid Autokool</div>
             <p style="font-size:14px;color:var(--text-mid);margin-bottom:16px;line-height:1.7;">
-              Õnneleid Autokool on Kodo partner — kvaliteetne AM-kategooria koolitus
-              ja kohe pärast lubade saamist saad meie autorendi <strong>20% soodsamalt</strong>!
+              Õnneleid Autokool on Kodo partner — pärast lubade saamist saad autorendi <strong>20% soodsamalt</strong>.
             </p>
 
-            <div style="background:var(--cream);border-radius:12px;padding:16px;margin-bottom:16px;">
-              <div style="font-weight:700;color:var(--forest);margin-bottom:10px;">📚 AM-kategooria koolituse pakett:</div>
-              <ul style="list-style:none;padding:0;margin:0;font-size:13px;color:var(--text-mid);line-height:2;">
-                <li>✅ Teooriaõpe (12 tundi)</li>
-                <li>✅ Sõidutunnid (10 tundi)</li>
-                <li>✅ Esmaabikursus (8 tundi)</li>
-                <li>✅ Eksami ettevalmistus</li>
-                <li>✅ Õppematerjalid kaasas</li>
-              </ul>
+            <!-- Vali kursus -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:16px;">
+
+              <!-- AM kursus -->
+              <div class="card" style="margin:0;padding:16px;background:var(--cream);border:1px solid var(--border);">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                  <div style="font-size:28px;">🛵</div>
+                  <div>
+                    <div style="font-weight:700;color:var(--forest);">AM-kategooria</div>
+                    <div style="font-size:11px;color:var(--text-light);">Mopeed + mopeedauto</div>
+                  </div>
+                </div>
+                <ul style="list-style:none;padding:0;margin:8px 0 12px;font-size:12px;color:var(--text-mid);line-height:1.9;">
+                  <li>✅ Teooria (12h) + sõit (10h)</li>
+                  <li>✅ Esmaabi (8h)</li>
+                  <li>✅ Saab 1 kuuga</li>
+                </ul>
+                <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:10px;">
+                  <span style="text-decoration:line-through;color:var(--text-light);font-size:13px;">450€</span>
+                  <span style="font-family:'Playfair Display',serif;font-size:20px;color:var(--forest);font-weight:700;">399€</span>
+                  <span style="font-size:11px;color:var(--text-light);">Kodo kaudu</span>
+                </div>
+                <a href="https://onneleid.ee" target="_blank" class="btn btn-primary btn-sm btn-full">Registreeri AM →</a>
+              </div>
+
+              <!-- B kursus -->
+              <div class="card" style="margin:0;padding:16px;background:var(--cream);border:2px solid var(--gold);">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                  <div style="font-size:28px;">🚙</div>
+                  <div>
+                    <div style="font-weight:700;color:var(--forest);">B-kategooria</div>
+                    <div style="font-size:11px;color:var(--text-light);">Auto + katab AM ka</div>
+                  </div>
+                </div>
+                <ul style="list-style:none;padding:0;margin:8px 0 12px;font-size:12px;color:var(--text-mid);line-height:1.9;">
+                  <li>✅ Teooria (28h) + sõit (30h)</li>
+                  <li>✅ Pimedasõit + libe</li>
+                  <li>✅ Lubab kõike — auto, mopeedauto, mopeed</li>
+                </ul>
+                <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:10px;">
+                  <span style="text-decoration:line-through;color:var(--text-light);font-size:13px;">1490€</span>
+                  <span style="font-family:'Playfair Display',serif;font-size:20px;color:var(--forest);font-weight:700;">1290€</span>
+                  <span style="font-size:11px;color:var(--text-light);">Kodo kaudu</span>
+                </div>
+                <a href="https://onneleid.ee" target="_blank" class="btn btn-primary btn-sm btn-full">Registreeri B →</a>
+              </div>
             </div>
 
-            <div style="display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#1A3326,#2A5240);color:#fff;padding:16px;border-radius:12px;margin-bottom:16px;">
-              <div>
-                <div style="font-size:11px;opacity:0.8;text-transform:uppercase;letter-spacing:1px;">Tavaline hind</div>
-                <div style="font-size:14px;text-decoration:line-through;opacity:0.7;">450€</div>
-                <div style="font-size:24px;font-family:'Playfair Display',serif;color:var(--gold-light);">399€ Kodo kaudu</div>
-              </div>
-              <div style="text-align:right;">
-                <div style="background:var(--gold);color:var(--forest);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;">⭐ KODO BOONUS</div>
-                <div style="font-size:11px;opacity:0.8;margin-top:6px;">+20% autorendi soodustus</div>
-              </div>
+            <div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:12px 14px;font-size:12px;color:#856404;line-height:1.7;">
+              💡 <strong>Tark valik:</strong> Kui plaanid niikuinii autoluba teha — mine kohe B-kategooriale. See <strong>katab automaatselt</strong> mopeedi, mopeedauto ja kõik muud kerged sõidukid. Eraldi AM-luba pole hiljem vaja.
             </div>
 
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
-              <a href="https://onneleid.ee" target="_blank" class="btn btn-primary" style="flex:1;min-width:200px;">
-                🎓 Registreeri koolitusele →
-              </a>
-              <button class="btn btn-outline" onclick="kysiKoolituseInfo()">Küsi rohkem infot</button>
+            <div style="margin-top:14px;display:flex;gap:10px;">
+              <button class="btn btn-outline btn-sm" onclick="kysiKoolituseInfo()">Küsi rohkem infot</button>
             </div>
           </div>
 
+          <!-- Selgitus mis luba lubab mida -->
           <div class="card" style="margin-top:16px;">
-            <div style="font-weight:700;color:var(--forest);margin-bottom:10px;">💡 Mis on AM-kategooria?</div>
-            <p style="font-size:13px;color:var(--text-mid);line-height:1.7;">
-              AM-kategooria luba lubab juhtida kuni 45 km/h sõitvaid sõidukeid — mopeedautosid
-              ja mopeede. See on Eesti kõige odavam ja lihtsam autokool — saadakse umbes 1 kuuga.
-              Kui sul on autoluba (B), pole AM-luba enam vaja eraldi.
-            </p>
+            <div style="font-weight:700;color:var(--forest);margin-bottom:10px;font-size:15px;">📋 Mis luba mida lubab?</div>
+            <table style="width:100%;font-size:13px;border-collapse:collapse;">
+              <thead>
+                <tr style="background:var(--cream);">
+                  <th style="text-align:left;padding:10px;border-bottom:1px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);">Sõiduk</th>
+                  <th style="text-align:center;padding:10px;border-bottom:1px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);">AM-luba</th>
+                  <th style="text-align:center;padding:10px;border-bottom:1px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);">B-luba</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding:10px;border-bottom:1px solid var(--border-lt,#eee);">🛵 Mopeed (kuni 45 km/h)</td><td style="text-align:center;padding:10px;border-bottom:1px solid var(--border-lt,#eee);">✅</td><td style="text-align:center;padding:10px;border-bottom:1px solid var(--border-lt,#eee);">✅</td></tr>
+                <tr><td style="padding:10px;border-bottom:1px solid var(--border-lt,#eee);">🚗 Mopeedauto (max 45 km/h)</td><td style="text-align:center;padding:10px;border-bottom:1px solid var(--border-lt,#eee);">✅</td><td style="text-align:center;padding:10px;border-bottom:1px solid var(--border-lt,#eee);">✅</td></tr>
+                <tr><td style="padding:10px;border-bottom:1px solid var(--border-lt,#eee);">🛴 Kergliikur / roller</td><td style="text-align:center;padding:10px;border-bottom:1px solid var(--border-lt,#eee);">✅</td><td style="text-align:center;padding:10px;border-bottom:1px solid var(--border-lt,#eee);">✅</td></tr>
+                <tr><td style="padding:10px;border-bottom:1px solid var(--border-lt,#eee);">🚙 Sõiduauto</td><td style="text-align:center;padding:10px;border-bottom:1px solid var(--border-lt,#eee);">❌</td><td style="text-align:center;padding:10px;border-bottom:1px solid var(--border-lt,#eee);">✅</td></tr>
+                <tr><td style="padding:10px;">🏍️ Mootorratas (kuni 125 cm³)</td><td style="text-align:center;padding:10px;">❌</td><td style="text-align:center;padding:10px;">⚠️ Vajab lisakursust*</td></tr>
+              </tbody>
+            </table>
+            <div style="font-size:11px;color:var(--text-light);margin-top:10px;line-height:1.6;">
+              * B-luba 2+ aastat olemas → autokoolis lühikursus (10-12h) → A1-õigus loale lisatud (kehtib Eestis).
+            </div>
           </div>
         </div>
 
-        <!-- ── AUTO PESU PAKKUJAD ── -->
-        <div id="autorent-step-pesu" style="display:none;">
-          <button class="btn btn-outline btn-sm" onclick="resetAutorent()" style="margin-bottom:16px;">← Tagasi</button>
+      </section>
 
-          <div class="card" style="background:linear-gradient(135deg,rgba(46,139,110,0.06),rgba(46,139,110,0.02));border:1px solid rgba(46,139,110,0.2);">
-            <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">
-              <div style="font-size:42px;" id="pesu-icon">🧽</div>
-              <div>
-                <div class="card-title" style="color:var(--forest);margin:0;font-size:22px;" id="pesu-title">Auto pesu</div>
-                <div style="font-size:13px;color:var(--text-light);" id="pesu-subtitle">Vali endale sobiv teenusepakkuja</div>
+      <!-- ── AUTO PESU (eraldi sektsioon) ── -->
+      <section id="k-autopesu" style="display:none;">
+        <h2 class="content-title serif">🧽 Auto pesu</h2>
+        <p class="content-sub">Broneeri auto pesu — vali aeg ja teenusepakkuja</p>
+
+        <!-- Step 1: Vali pesu tüüp -->
+        <div id="pesu-step-1">
+          <div class="card-title" style="margin-bottom:16px;">1️⃣ Mida soovid pesta?</div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:24px;">
+            <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;margin:0;text-align:center;" onclick="valiPesuTyyp('valispesu')">
+              <div style="font-size:48px;margin-bottom:10px;">💦</div>
+              <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--forest);margin-bottom:6px;">Välispesu</div>
+              <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Auto välispind, vahud, vööd, kuivatus</div>
+              <span class="badge badge-green">Alates 12€</span>
+            </div>
+
+            <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;margin:0;text-align:center;" onclick="valiPesuTyyp('sisepesu')">
+              <div style="font-size:48px;margin-bottom:10px;">🪑</div>
+              <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--forest);margin-bottom:6px;">Sisepesu</div>
+              <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Salongi tolmuimemine, mati, paneelid</div>
+              <span class="badge badge-green">Alates 18€</span>
+            </div>
+
+            <div class="card" style="cursor:pointer;border:2px solid var(--gold);transition:all 0.2s;margin:0;text-align:center;background:linear-gradient(135deg,rgba(201,168,76,0.05),rgba(201,168,76,0.02));" onclick="valiPesuTyyp('koos')">
+              <div style="font-size:48px;margin-bottom:10px;">✨</div>
+              <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--forest);margin-bottom:6px;">Mõlemad (sise + välis)</div>
+              <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Täielik puhastus — sisemus + välimus</div>
+              <div style="display:flex;justify-content:center;gap:6px;">
+                <span class="badge" style="background:#C9A84C;color:var(--forest);">⭐ Soodne</span>
+                <span class="badge badge-green">Alates 25€</span>
               </div>
             </div>
-            <div style="background:rgba(36,113,163,0.08);border:1px solid rgba(36,113,163,0.15);border-radius:8px;padding:10px 12px;font-size:12px;color:#0C5460;line-height:1.6;">
-              ℹ️ Hinnad on iga teenusepakkuja oma — võrdle ja vali kõige sobivam!
+          </div>
+
+          <!-- BOLT JUHTIDELE BANNER -->
+          <div style="background:linear-gradient(135deg,#000,#1a1a1a);color:#fff;border-radius:14px;padding:20px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;">
+            <div style="font-size:42px;background:#34D186;width:60px;height:60px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">🚕</div>
+            <div style="flex:1;min-width:240px;">
+              <div style="font-family:'Playfair Display',serif;font-size:20px;color:#34D186;margin-bottom:4px;">Bolt juhtidele -25%</div>
+              <div style="font-size:13px;opacity:0.9;line-height:1.6;">
+                Sõidad Bolt'iga? Saad kõik pesud <strong>25% soodsamalt</strong>. 
+                Tõesta Bolt-juhi staatus oma kontoga ja saadustus on kohe sees.
+              </div>
+            </div>
+            <button onclick="aktiveeriBoltSoodustus()" style="background:#34D186;color:#000;border:none;border-radius:10px;padding:10px 20px;font-weight:700;font-size:13px;cursor:pointer;">
+              Olen Bolt juht ✓
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Vali aeg + teenusepakkuja -->
+        <div id="pesu-step-2" style="display:none;">
+          <button class="btn btn-outline btn-sm" onclick="resetPesu()" style="margin-bottom:16px;">← Tagasi</button>
+
+          <div class="card" style="background:linear-gradient(135deg,rgba(46,139,110,0.06),rgba(46,139,110,0.02));border:1px solid rgba(46,139,110,0.2);">
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div style="font-size:42px;" id="ps-icon">🧽</div>
+              <div style="flex:1;">
+                <div class="card-title" style="color:var(--forest);margin:0;font-size:22px;" id="ps-title">Auto pesu</div>
+                <div style="font-size:13px;color:var(--text-light);" id="ps-sub">Vali aeg ja pakkuja</div>
+              </div>
+              <div id="ps-bolt-badge" style="display:none;background:#34D186;color:#000;padding:4px 12px;border-radius:20px;font-weight:700;font-size:12px;">🚕 Bolt -25%</div>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-title">🛠️ Saadaval teenusepakkujad</div>
-            <div id="pesu-pakkujad" style="display:flex;flex-direction:column;gap:12px;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+              <div class="card-title" style="margin:0;">📅 Vabad ajad lähima nädala jooksul</div>
+              <select class="input-field" id="ps-paev-filter" onchange="renderPesuAjad()" style="width:auto;padding:8px 12px;font-size:13px;">
+                <option value="koik">Kõik päevad</option>
+                <option value="taenq">Täna</option>
+                <option value="homme">Homme</option>
+                <option value="ylehomme">Ülehomme</option>
+              </select>
+            </div>
+            <div id="ps-ajad-list" style="display:flex;flex-direction:column;gap:10px;"></div>
           </div>
 
           <div style="background:linear-gradient(135deg,#1A3326,#2A5240);color:#fff;border-radius:14px;padding:18px;margin-top:16px;display:flex;gap:14px;align-items:center;">
             <div style="font-size:32px;">🧹</div>
             <div style="flex:1;">
               <div style="font-weight:700;font-size:15px;color:var(--gold-light);">Oled ise teenusepakkuja?</div>
-              <div style="font-size:12px;color:var(--mint);margin-top:2px;">Lisa "Auto pesu" oma profiilile ja võta töid vastu — Kodo komisjon ainult 8% (klient maksab).</div>
+              <div style="font-size:12px;color:var(--mint);margin-top:2px;">
+                Lisa "Auto pesu" oma profiilile, määra hinnad ja vabad ajad. Kodo komisjon 8% (klient maksab).
+              </div>
             </div>
           </div>
         </div>
 
       </section>
+
 
 
       <!-- K: TRAINING -->
@@ -3819,12 +3960,16 @@ function valiAutoTyyp(tyyp) {
 function resetAutorent() {
   ['autorent-step-1','autorent-step-b','autorent-step-b-veriff','autorent-step-b-autod','autorent-step-b-koolitus',
    'autorent-step-moped-aasta','autorent-step-vaba','autorent-step-vajab-luba',
-   'autorent-step-am-on','autorent-step-koolitus','autorent-step-pesu'].forEach(function(id) {
+   'autorent-step-am-on','autorent-step-koolitus','autorent-step-broneering'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.style.display = id === 'autorent-step-1' ? 'block' : 'none';
   });
   var syndEl = document.getElementById('moped-synd');
   if (syndEl) syndEl.value = '';
+  var pesuChk = document.getElementById('br-pesu-checkbox');
+  if (pesuChk) pesuChk.checked = false;
+  var paeviInp = document.getElementById('br-paevi');
+  if (paeviInp) paeviInp.value = '1';
 }
 
 function kontrolliKuupaeva() {
@@ -3901,7 +4046,158 @@ function renderMopedList(targetId) {
 }
 
 function bookAuto(nimi, hind) {
-  alert('🚗 Broneerimine: ' + nimi + ' (' + hind + '€/päev)\n\nRendileping luuakse automaatselt — Smart-ID allkirjastamine järgmises sammus.');
+  // Salvesta valitud auto andmed
+  window.kodoBookingData = { nimi: nimi, hind: hind, deposiit: 50, paevi: 1 };
+  // Näita broneeringu vormi
+  document.getElementById('autorent-step-1').style.display = 'none';
+  document.getElementById('autorent-step-b').style.display = 'none';
+  document.getElementById('autorent-step-b-veriff').style.display = 'none';
+  document.getElementById('autorent-step-b-autod').style.display = 'none';
+  document.getElementById('autorent-step-b-koolitus').style.display = 'none';
+  document.getElementById('autorent-step-vaba').style.display = 'none';
+  document.getElementById('autorent-step-am-on').style.display = 'none';
+  document.getElementById('autorent-step-broneering').style.display = 'block';
+  uuendaBroneering();
+}
+
+function uuendaBroneering() {
+  var d = window.kodoBookingData;
+  if (!d) return;
+  var paevi = parseInt(document.getElementById('br-paevi')?.value) || 1;
+  d.paevi = paevi;
+  var rentSumma = d.hind * paevi;
+  var pesuLisa = document.getElementById('br-pesu-checkbox')?.checked ? 25 : 0;
+  var komisjon = (rentSumma + pesuLisa) * 0.08;
+  var deposiit = pesuLisa > 0 ? 0 : d.deposiit;  // Kui valib pesu, deposiiti pole vaja
+  var kokku = rentSumma + pesuLisa + komisjon + deposiit;
+
+  function set(id, v) { var e=document.getElementById(id); if(e) e.textContent=v; }
+  set('br-auto-nimi', d.nimi);
+  set('br-rent', rentSumma.toFixed(2) + '€');
+  set('br-rent-paevad', paevi + ' päeva × ' + d.hind + '€');
+  set('br-pesu', pesuLisa.toFixed(2) + '€');
+  set('br-komisjon', komisjon.toFixed(2) + '€');
+  set('br-deposiit', deposiit.toFixed(2) + '€');
+  set('br-kokku', kokku.toFixed(2) + '€');
+
+  var depRow = document.getElementById('br-deposiit-row');
+  var depInfo = document.getElementById('br-deposiit-info');
+  if (pesuLisa > 0) {
+    if (depRow) depRow.style.opacity = '0.5';
+    if (depInfo) depInfo.innerHTML = '✅ <strong>Deposiit ära!</strong> Pesu broneeritakse automaatselt tagastuspäevale ja sa saad auto puhtana üle anda.';
+  } else {
+    if (depRow) depRow.style.opacity = '1';
+    if (depInfo) depInfo.innerHTML = '💡 Tagasta auto puhtana ja saad <strong>50€ deposiidi tagasi</strong>. Mustana tagastades deposiit kaotatakse.';
+  }
+}
+
+function kinnitaBroneering() {
+  var d = window.kodoBookingData;
+  var pesu = document.getElementById('br-pesu-checkbox')?.checked;
+  var msg = '🚗 Broneerimine kinnitatud!\n\nAuto: ' + d.nimi + '\nPäevi: ' + d.paevi;
+  if (pesu) {
+    msg += '\n\n✅ Auto pesu broneeritud automaatselt tagastuspäevale!';
+    msg += '\nPesu töö lisatud sinu kalendrisse.';
+    msg += '\nDeposiit ei ole vaja maksta.';
+  } else {
+    msg += '\n\n⚠️ Tagasta auto puhtana, et 50€ deposiit tagasi saada.';
+  }
+  alert(msg);
+  resetAutorent();
+}
+
+// ── AUTO PESU (uus eraldi sektsioon) ──
+function valiPesuTyyp(tyyp) {
+  var info = {
+    valispesu: { icon:'💦', title:'Auto välispesu',  sub:'Auto välispind, vahud, vööd, kuivatus' },
+    sisepesu:  { icon:'🪑', title:'Auto sisepesu',   sub:'Salongi tolmuimemine, mati, paneelid' },
+    koos:      { icon:'✨', title:'Sise + Välispesu', sub:'Täielik puhastus — sisemus + välimus' }
+  };
+  var i = info[tyyp];
+  window.kodoPesuValik = tyyp;
+  document.getElementById('pesu-step-1').style.display = 'none';
+  document.getElementById('pesu-step-2').style.display = 'block';
+  document.getElementById('ps-icon').textContent = i.icon;
+  document.getElementById('ps-title').textContent = i.title;
+  document.getElementById('ps-sub').textContent = i.sub;
+  if (window.kodoBoltSoodustus) {
+    document.getElementById('ps-bolt-badge').style.display = 'block';
+  }
+  renderPesuAjad();
+}
+
+function resetPesu() {
+  document.getElementById('pesu-step-1').style.display = 'block';
+  document.getElementById('pesu-step-2').style.display = 'none';
+}
+
+function aktiveeriBoltSoodustus() {
+  if (window.kodoBoltSoodustus) {
+    alert('Bolt soodustus on juba aktiivne ✓');
+    return;
+  }
+  // Demo - päris versioonis kontrollime Bolt API kaudu
+  var jah = confirm('Bolt-juhi staatuse kinnitamiseks ühendame sinu Bolt kontoga.\n\nDemos lihtsalt aktiveerime soodustuse — kas jätkad?');
+  if (jah) {
+    window.kodoBoltSoodustus = true;
+    alert('🚕 Bolt soodustus aktiveeritud!\n\nKõik pesud nüüd 25% soodsamalt.');
+  }
+}
+
+function renderPesuAjad() {
+  var tyyp = window.kodoPesuValik || 'valispesu';
+  var hindBaas = { valispesu: 12, sisepesu: 18, koos: 25 }[tyyp];
+
+  // Genereeri vabad ajad — pakkuja + päev + kell
+  var pakkujad = [
+    { nimi:'Kalle Pesumaja', loc:'Tallinn, Mustamäe', hindKoef:1.0, hinnang:4.8, emoji:'👨' },
+    { nimi:'Maria Tamm',     loc:'Tallinn, Kesklinn', hindKoef:1.25, hinnang:4.9, emoji:'👩' },
+    { nimi:'AutoFix OÜ',     loc:'Tallinn, Lasnamäe', hindKoef:1.15, hinnang:4.6, emoji:'🏢' },
+    { nimi:'Olga Ivanova',   loc:'Tallinn, Lasnamäe', hindKoef:1.0,  hinnang:4.8, emoji:'👩' },
+    { nimi:'Jaan Kask',      loc:'Tartu, Annelinn',   hindKoef:0.85, hinnang:4.7, emoji:'👨' },
+  ];
+
+  var paevad = [
+    { kp:'Täna 18. apr',     key:'taenq', kellad:['16:00','17:30','18:00','19:00'] },
+    { kp:'Homme 19. apr',    key:'homme', kellad:['09:00','10:00','11:00','12:00','14:00','15:00'] },
+    { kp:'Ülehomme 20. apr', key:'ylehomme', kellad:['09:00','11:00','13:00','15:00','17:00'] },
+  ];
+
+  var filter = document.getElementById('ps-paev-filter')?.value || 'koik';
+  var ajad = [];
+  paevad.forEach(function(p) {
+    if (filter !== 'koik' && filter !== p.key) return;
+    p.kellad.forEach(function(k) {
+      // Random pakkuja selle aja juurde
+      var pakkuja = pakkujad[Math.floor(Math.random() * pakkujad.length)];
+      ajad.push({ paev: p.kp, kell: k, pakkuja: pakkuja });
+    });
+  });
+
+  var html = ajad.map(function(a) {
+    var tegijaHind = hindBaas * a.pakkuja.hindKoef;
+    var klientHind = tegijaHind * 1.08; // +8% Kodo
+    if (window.kodoBoltSoodustus) klientHind *= 0.75; // -25% Bolt
+    return '<div style="background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">' +
+      '<div style="width:42px;height:42px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">' + a.pakkuja.emoji + '</div>' +
+      '<div style="flex:1;min-width:170px;">' +
+        '<div style="font-weight:700;color:var(--forest);font-size:14px;">' + a.paev + ' · ' + a.kell + '</div>' +
+        '<div style="font-size:12px;color:var(--text-light);">' + a.pakkuja.nimi + ' · ⭐ ' + a.pakkuja.hinnang + ' · 📍 ' + a.pakkuja.loc + '</div>' +
+      '</div>' +
+      '<div style="text-align:right;">' +
+        (window.kodoBoltSoodustus ? '<div style="font-size:11px;color:#34D186;font-weight:700;">🚕 Bolt -25%</div>' : '') +
+        '<div style="font-family:Playfair Display,serif;font-size:18px;color:var(--forest);font-weight:700;">' + klientHind.toFixed(2) + '€</div>' +
+      '</div>' +
+      '<button class="btn btn-primary btn-sm" onclick="bookPesuAeg(\'' + a.pakkuja.nimi + '\',\'' + a.paev + ' ' + a.kell + '\',' + klientHind.toFixed(2) + ')">Broneeri</button>' +
+    '</div>';
+  }).join('');
+
+  var listEl = document.getElementById('ps-ajad-list');
+  if (listEl) listEl.innerHTML = html || '<div style="padding:20px;text-align:center;color:var(--text-light);">Selle päeva kohta vabu aegu pole.</div>';
+}
+
+function bookPesuAeg(pakkuja, aeg, hind) {
+  alert('🧽 Broneerimine kinnitatud!\n\nPakkuja: ' + pakkuja + '\nAeg: ' + aeg + '\nHind: ' + hind + '€\n\nLisan kalendrisse ja saadan teavitused.');
 }
 
 function kysiKoolituseInfo() {
