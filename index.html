@@ -1072,31 +1072,69 @@
 
         <!-- Step 1: Vali kategooria -->
         <div id="autorent-step-1">
-          <div class="card-title" style="margin-bottom:16px;">1️⃣ Vali sõiduki tüüp</div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;">
+          <div class="card-title" style="margin-bottom:16px;">Mida soovid teha?</div>
+
+          <!-- Renting cars -->
+          <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--forest);margin-bottom:12px;">🚗 Rendi sõiduk</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:32px;">
 
             <!-- Sõiduauto B-kategooria -->
-            <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;" onclick="valiAutoTyyp('b')">
-              <div style="font-size:48px;margin-bottom:12px;">🚙</div>
-              <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--forest);margin-bottom:6px;">Sõiduauto (B-kategooria)</div>
+            <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;margin:0;" onclick="valiAutoTyyp('b')">
+              <div style="font-size:42px;margin-bottom:10px;">🚙</div>
+              <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--forest);margin-bottom:6px;">Sõiduauto (B-kategooria)</div>
               <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Tavaline sõiduauto kuni 9 inimesele</div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-                <span class="badge badge-blue">Vaja B-kat. juhiluba</span>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+                <span class="badge badge-blue">B-luba + Veriff</span>
                 <span class="badge badge-green">Alates 25€/päev</span>
               </div>
               <button class="btn btn-primary btn-sm">Vali sõiduauto →</button>
             </div>
 
             <!-- Mopeedauto -->
-            <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;" onclick="valiAutoTyyp('mopeedauto')">
-              <div style="font-size:48px;margin-bottom:12px;">🚗</div>
-              <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--forest);margin-bottom:6px;">Mopeedauto</div>
-              <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Microcar, Aixam, Ligier — sõiduki max 45 km/h</div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;margin:0;" onclick="valiAutoTyyp('mopeedauto')">
+              <div style="font-size:42px;margin-bottom:10px;">🚗</div>
+              <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--forest);margin-bottom:6px;">Mopeedauto</div>
+              <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Microcar, Aixam, Ligier — max 45 km/h</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
                 <span class="badge badge-yellow">Sõltub sünniaastast</span>
                 <span class="badge badge-green">Alates 18€/päev</span>
               </div>
               <button class="btn btn-primary btn-sm">Vali mopeedauto →</button>
+            </div>
+          </div>
+
+          <!-- Car wash -->
+          <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--forest);margin-bottom:12px;">🧽 Broneeri auto pesu</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
+
+            <!-- Välispesu -->
+            <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;margin:0;" onclick="valiPesu('valispesu')">
+              <div style="font-size:42px;margin-bottom:10px;">💦</div>
+              <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--forest);margin-bottom:6px;">Välispesu</div>
+              <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Auto välispind, vahud, vööd, kuivatus</div>
+              <span class="badge badge-green">Alates 12€</span>
+              <div style="margin-top:10px;"><button class="btn btn-primary btn-sm">Vali välispesu →</button></div>
+            </div>
+
+            <!-- Sisepesu -->
+            <div class="card" style="cursor:pointer;border:2px solid var(--border);transition:all 0.2s;margin:0;" onclick="valiPesu('sisepesu')">
+              <div style="font-size:42px;margin-bottom:10px;">🪑</div>
+              <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--forest);margin-bottom:6px;">Sisepesu</div>
+              <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Salongi tolmuimemine, mati, paneelid</div>
+              <span class="badge badge-green">Alates 18€</span>
+              <div style="margin-top:10px;"><button class="btn btn-primary btn-sm">Vali sisepesu →</button></div>
+            </div>
+
+            <!-- Komplekt -->
+            <div class="card" style="cursor:pointer;border:2px solid var(--accent,#C9A84C);transition:all 0.2s;margin:0;background:linear-gradient(135deg,rgba(201,168,76,0.05),rgba(201,168,76,0.02));" onclick="valiPesu('koos')">
+              <div style="font-size:42px;margin-bottom:10px;">✨</div>
+              <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--forest);margin-bottom:6px;">Sise + Välispesu</div>
+              <div style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Täielik puhastus — sisemus + välimus</div>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="badge badge-gold" style="background:#C9A84C;color:var(--forest);">⭐ Soodne</span>
+                <span class="badge badge-green">Alates 25€</span>
+              </div>
+              <div style="margin-top:10px;"><button class="btn btn-primary btn-sm">Vali komplekt →</button></div>
             </div>
           </div>
         </div>
@@ -1334,6 +1372,37 @@
               ja mopeede. See on Eesti kõige odavam ja lihtsam autokool — saadakse umbes 1 kuuga.
               Kui sul on autoluba (B), pole AM-luba enam vaja eraldi.
             </p>
+          </div>
+        </div>
+
+        <!-- ── AUTO PESU PAKKUJAD ── -->
+        <div id="autorent-step-pesu" style="display:none;">
+          <button class="btn btn-outline btn-sm" onclick="resetAutorent()" style="margin-bottom:16px;">← Tagasi</button>
+
+          <div class="card" style="background:linear-gradient(135deg,rgba(46,139,110,0.06),rgba(46,139,110,0.02));border:1px solid rgba(46,139,110,0.2);">
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">
+              <div style="font-size:42px;" id="pesu-icon">🧽</div>
+              <div>
+                <div class="card-title" style="color:var(--forest);margin:0;font-size:22px;" id="pesu-title">Auto pesu</div>
+                <div style="font-size:13px;color:var(--text-light);" id="pesu-subtitle">Vali endale sobiv teenusepakkuja</div>
+              </div>
+            </div>
+            <div style="background:rgba(36,113,163,0.08);border:1px solid rgba(36,113,163,0.15);border-radius:8px;padding:10px 12px;font-size:12px;color:#0C5460;line-height:1.6;">
+              ℹ️ Hinnad on iga teenusepakkuja oma — võrdle ja vali kõige sobivam!
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🛠️ Saadaval teenusepakkujad</div>
+            <div id="pesu-pakkujad" style="display:flex;flex-direction:column;gap:12px;"></div>
+          </div>
+
+          <div style="background:linear-gradient(135deg,#1A3326,#2A5240);color:#fff;border-radius:14px;padding:18px;margin-top:16px;display:flex;gap:14px;align-items:center;">
+            <div style="font-size:32px;">🧹</div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:15px;color:var(--gold-light);">Oled ise teenusepakkuja?</div>
+              <div style="font-size:12px;color:var(--mint);margin-top:2px;">Lisa "Auto pesu" oma profiilile ja võta töid vastu — Kodo komisjon ainult 8% (klient maksab).</div>
+            </div>
           </div>
         </div>
 
@@ -3750,7 +3819,7 @@ function valiAutoTyyp(tyyp) {
 function resetAutorent() {
   ['autorent-step-1','autorent-step-b','autorent-step-b-veriff','autorent-step-b-autod','autorent-step-b-koolitus',
    'autorent-step-moped-aasta','autorent-step-vaba','autorent-step-vajab-luba',
-   'autorent-step-am-on','autorent-step-koolitus'].forEach(function(id) {
+   'autorent-step-am-on','autorent-step-koolitus','autorent-step-pesu'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.style.display = id === 'autorent-step-1' ? 'block' : 'none';
   });
@@ -3864,6 +3933,70 @@ function alustaVeriffi() {
       renderAutoBList();
     }, 2000);
   }, 1500);
+}
+
+
+
+// ── AUTO PESU ──
+function valiPesu(tyyp) {
+  document.getElementById('autorent-step-1').style.display = 'none';
+  document.getElementById('autorent-step-pesu').style.display = 'block';
+
+  var info = {
+    valispesu: { icon: '💦', title: 'Auto välispesu', sub: 'Auto välispind, vahud, vööd, kuivatus' },
+    sisepesu:  { icon: '🪑', title: 'Auto sisepesu',  sub: 'Salongi tolmuimemine, mati, paneelid' },
+    koos:      { icon: '✨', title: 'Sise + Välispesu', sub: 'Täielik puhastus — sisemus + välimus' }
+  };
+  var i = info[tyyp];
+  document.getElementById('pesu-icon').textContent = i.icon;
+  document.getElementById('pesu-title').textContent = i.title;
+  document.getElementById('pesu-subtitle').textContent = i.sub;
+
+  // Demo pakkujad - iga oma hinnad
+  var pakkujad = {
+    valispesu: [
+      { nimi: 'Kalle Pesumaja', asukoht: 'Tallinn, Mustamäe', hind: 12, hinnang: 4.8, kiir: '20 min', emoji: '👨' },
+      { nimi: 'Maria Tamm',     asukoht: 'Tallinn, Kesklinn', hind: 15, hinnang: 4.9, kiir: '30 min', emoji: '👩' },
+      { nimi: 'AutoFix OÜ',     asukoht: 'Tallinn, Lasnamäe', hind: 14, hinnang: 4.6, kiir: '25 min', emoji: '🏢' },
+      { nimi: 'Jaan Kask',      asukoht: 'Tartu, Annelinn',   hind: 10, hinnang: 4.7, kiir: '25 min', emoji: '👨' },
+    ],
+    sisepesu: [
+      { nimi: 'Maria Tamm',     asukoht: 'Tallinn, Kesklinn', hind: 22, hinnang: 4.9, kiir: '60 min', emoji: '👩' },
+      { nimi: 'Olga Ivanova',   asukoht: 'Tallinn, Lasnamäe', hind: 18, hinnang: 4.8, kiir: '45 min', emoji: '👩' },
+      { nimi: 'AutoFix OÜ',     asukoht: 'Tallinn, Lasnamäe', hind: 25, hinnang: 4.6, kiir: '60 min', emoji: '🏢' },
+      { nimi: 'Sergei P.',      asukoht: 'Pärnu, Kesklinn',   hind: 20, hinnang: 4.7, kiir: '50 min', emoji: '👨' },
+    ],
+    koos: [
+      { nimi: 'Kalle Pesumaja', asukoht: 'Tallinn, Mustamäe', hind: 28, hinnang: 4.8, kiir: '90 min', emoji: '👨' },
+      { nimi: 'Maria Tamm',     asukoht: 'Tallinn, Kesklinn', hind: 32, hinnang: 4.9, kiir: '90 min', emoji: '👩' },
+      { nimi: 'AutoFix OÜ',     asukoht: 'Tallinn, Lasnamäe', hind: 35, hinnang: 4.6, kiir: '80 min', emoji: '🏢' },
+      { nimi: 'Olga Ivanova',   asukoht: 'Tallinn, Lasnamäe', hind: 30, hinnang: 4.8, kiir: '75 min', emoji: '👩' },
+      { nimi: 'Jaan Kask',      asukoht: 'Tartu, Annelinn',   hind: 25, hinnang: 4.7, kiir: '90 min', emoji: '👨' },
+    ]
+  };
+
+  var lst = pakkujad[tyyp] || [];
+  var html = lst.map(function(p) {
+    var klientHind = (p.hind * 1.08).toFixed(2);
+    return '<div class="card" style="margin:0;padding:14px;border:1px solid var(--border);">' +
+      '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">' +
+        '<div style="width:50px;height:50px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">' + p.emoji + '</div>' +
+        '<div style="flex:1;min-width:180px;">' +
+          '<div style="font-weight:700;color:var(--forest);font-size:15px;">' + p.nimi + '</div>' +
+          '<div style="font-size:12px;color:var(--text-light);">📍 ' + p.asukoht + ' · ⭐ ' + p.hinnang + ' · ⏱️ ' + p.kiir + '</div>' +
+        '</div>' +
+        '<div style="text-align:right;">' +
+          '<div style="font-family:Playfair Display,serif;font-size:22px;font-weight:700;color:var(--forest);">' + klientHind + '€</div>' +
+          '<div style="font-size:10px;color:var(--text-light);">sh 8% Kodo tasu</div>' +
+        '</div>' +
+        '<button class="btn btn-primary btn-sm" onclick="bookPesu(\'' + p.nimi + '\',' + klientHind + ')">Broneeri</button>' +
+      '</div></div>';
+  }).join('');
+  document.getElementById('pesu-pakkujad').innerHTML = html;
+}
+
+function bookPesu(nimi, hind) {
+  alert('🧽 Broneerimine: ' + nimi + ' (' + hind + '€)\n\nValid kuupäeva ja kellaaja järgmises sammus.');
 }
 
 </script>
