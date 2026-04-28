@@ -9,172 +9,163 @@
 
 <style>
   :root {
-    --bg-main: #0F1713;
-    --bg-card: rgba(24, 38, 32, 0.98);
+    --bg-main: #FDFCF9;
+    --bg-card: rgba(255, 255, 255, 0.94);
     --forest: #1A3326;
+    --sage: #5C8A6E;
     --gold: #C9A84C;
+    --text: #2D3436; 
+    --text-light: #636E72;
+    --border: #EFEBE3;
+    --pattern-color: #1A3326; 
+    --pattern-opacity: 0.05; 
+    --shadow: 0 10px 30px rgba(26,51,38,0.05);
+  }
+
+  body.dark-mode {
+    --bg-main: #0F1713;
+    --bg-card: rgba(24, 38, 32, 0.95);
     --text: #EFEBE3;
     --text-light: #A0AEC0;
     --border: #1F2F27;
+    --pattern-color: #C9A84C;
+    --pattern-opacity: 0.03;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: all 0.3s ease; }
 
   body {
     background-color: var(--bg-main);
     color: var(--text);
     min-height: 100vh;
-    background-image: radial-gradient(circle at 2px 2px, var(--forest) 1px, transparent 0);
+    background-image: radial-gradient(circle at 2px 2px, var(--pattern-color) 1px, transparent 0);
     background-size: 40px 40px;
-    transition: 0.5s;
   }
 
-  /* LOGIN EKRAAN */
+  /* --- LOGIN SECTION --- */
   #login-screen {
     display: flex; min-height: 100vh; align-items: center; justify-content: center; padding: 20px;
   }
 
   .login-card {
-    background: var(--bg-card);
-    padding: 50px;
-    border-radius: 35px;
-    width: 100%;
-    max-width: 440px;
-    border: 1px solid var(--border);
-    text-align: center;
-    backdrop-filter: blur(15px);
-    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    background: var(--bg-card); padding: 50px; border-radius: 40px;
+    box-shadow: var(--shadow); width: 100%; max-width: 450px;
+    border: 1px solid var(--border); text-align: center;
+    backdrop-filter: blur(10px);
   }
 
-  h1 { font-family: 'Playfair Display', serif; font-size: 42px; color: var(--gold); margin-bottom: 10px; }
+  h1 { font-family: 'Playfair Display', serif; font-size: 42px; margin-bottom: 10px; color: var(--forest); }
+  body.dark-mode h1 { color: var(--gold); }
 
-  .input-group { text-align: left; margin-bottom: 20px; }
-  .input-label { display: block; font-size: 14px; color: var(--gold); margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .input-group { text-align: left; margin-bottom: 25px; }
+  .input-label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; color: var(--sage); }
   
   .input-field {
-    width: 100%;
-    padding: 18px;
-    border-radius: 15px;
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,0.03);
-    color: white;
-    font-size: 16px;
-    outline: none;
+    width: 100%; padding: 18px; border-radius: 16px; border: 1px solid var(--border);
+    background: var(--bg-main); color: var(--text); font-size: 16px;
   }
 
-  .btn-ninja {
-    width: 100%;
-    padding: 20px;
-    border-radius: 15px;
-    border: none;
-    background: var(--gold);
-    color: var(--forest);
-    font-weight: 800;
-    font-size: 16px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: 0.3s;
+  .btn {
+    width: 100%; padding: 18px; border-radius: 16px; border: none;
+    font-weight: 700; cursor: pointer; background: var(--forest); color: white;
+    font-size: 16px; text-transform: uppercase; letter-spacing: 1px;
   }
-  .btn-ninja:hover { opacity: 0.9; transform: translateY(-2px); }
+  body.dark-mode .btn { background: var(--gold); color: var(--forest); }
 
-  /* DASHBOARD (Peidetud alguses) */
-  #main-content { 
-    display: none; 
-    padding: 60px 20px; 
-    max-width: 1100px; 
-    margin: 0 auto; 
-    animation: fadeIn 0.8s ease-out;
-  }
-
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
+  /* --- MAIN CONTENT SECTION --- */
+  #main-content { display: none; padding: 40px 20px; max-width: 1100px; margin: 0 auto; }
   
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+  
   .card {
-    background: var(--bg-card);
-    padding: 50px 30px;
-    border-radius: 30px;
-    border: 1px solid var(--border);
-    text-align: center;
-    cursor: pointer;
-    transition: 0.4s;
+    background: var(--bg-card); padding: 40px 30px; border-radius: 30px;
+    border: 1px solid var(--border); text-align: center; cursor: pointer;
+    box-shadow: var(--shadow);
   }
-
-  .card:hover { border-color: var(--gold); transform: translateY(-10px); background: #15231c; }
-  .card span { font-size: 60px; display: block; margin-bottom: 20px; }
-  .card h3 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--gold); }
+  .card:hover { border-color: var(--gold); transform: translateY(-10px); }
+  .card span { font-size: 50px; display: block; margin-bottom: 20px; }
 
   .hidden { display: none !important; }
+
+  /* Teema lüliti */
+  .theme-switch {
+    position: fixed; top: 20px; right: 20px; padding: 10px 20px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 14px;
+    display: flex; align-items: center; gap: 8px; z-index: 100;
+  }
 </style>
 </head>
-<body>
+<body class="dark-mode"> <button class="theme-switch" onclick="toggleTheme()">
+  <span id="theme-icon">☀️</span> <span id="theme-text">Hele režiim</span>
+</button>
 
 <div id="login-screen">
   <div class="login-card">
-    <div style="font-size: 50px; margin-bottom: 15px;">🥷</div>
     <h1>Koduninja</h1>
-    <p style="color: var(--text-light); margin-bottom: 40px;">Eksklusiivne Euroopa teenuste platvorm</p>
+    <p style="color: var(--text-light); margin-bottom: 40px;">Eksklusiivne teenuste platvorm</p>
     
     <div class="input-group">
-      <span class="input-label">Kasutaja</span>
-      <input id="email" class="input-field" type="email" value="ninja@demo.ee">
+      <label class="input-label">Kasutajatunnus</label>
+      <input id="email" class="input-field" type="email" value="klient@demo.ee">
     </div>
     
     <div class="input-group">
-      <span class="input-label">Parool</span>
+      <label class="input-label">Parool</label>
       <input id="password" class="input-field" type="password" value="demo123">
     </div>
     
-    <button class="btn-ninja" onclick="runDemo()">Logi sisse →</button>
+    <button class="btn" onclick="handleLogin()">Logi sisse →</button>
   </div>
 </div>
 
 <div id="main-content">
   <div class="header">
     <div>
-      <h2 style="font-family: 'Playfair Display', serif; font-size: 38px; color: var(--gold);">Tere tulemast, Ninja!</h2>
-      <p style="color: var(--text-light); text-transform: uppercase; font-size: 12px; letter-spacing: 2px;">Teie personaalne töölaud</p>
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 36px;">Tere tulemast!</h2>
+      <p style="color: var(--gold); font-weight: 700; font-size: 14px; text-transform: uppercase;">Ninja Dashboard</p>
     </div>
-    <button onclick="location.reload()" style="background:none; border:1px solid var(--gold); color:var(--gold); padding:10px 20px; border-radius:12px; cursor:pointer; font-weight:700;">Logi välja</button>
+    <button class="btn" style="width: auto; padding: 10px 20px;" onclick="location.reload()">Logi välja</button>
   </div>
 
   <div class="grid">
-    <div class="card" onclick="alert('Koristusteenused avanevad siin...')">
+    <div class="card">
       <span>🧹</span>
       <h3>Koristus</h3>
-      <p style="color: var(--text-light); margin-top: 15px;">Kodu, kontor ja suurpuhastus</p>
+      <p style="color: var(--text-light); margin-top: 10px;">Luksuslik puhtus Sinu kodus</p>
     </div>
-    <div class="card" onclick="alert('Remondimeistrid avanevad siin...')">
+    <div class="card">
       <span>🛠️</span>
       <h3>Remont</h3>
-      <p style="color: var(--text-light); margin-top: 15px;">Meistrimehed ja pisiparandused</p>
+      <p style="color: var(--text-light); margin-top: 10px;">Meistrid, keda saad usaldada</p>
     </div>
-    <div class="card" onclick="alert('Aiatööde haldus avaneb siin...')">
+    <div class="card">
       <span>🌿</span>
       <h3>Aiatööd</h3>
-      <p style="color: var(--text-light); margin-top: 15px;">Muruniitmine ja haljastus</p>
+      <p style="color: var(--text-light); margin-top: 10px;">Sinu roheline oaas</p>
     </div>
   </div>
 </div>
 
 <script>
-  // See funktsioon teebki Koduninjast töötava demo
-  function runDemo() {
-    const email = document.getElementById('email').value;
-    const pass = document.getElementById('password').value;
+  function handleLogin() {
+    // See on see käsk, mis su saadetud failis puudu oli:
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+  }
 
-    // See on kontroll: kui parool on demo123, siis laseme sisse
-    if (pass === 'demo123' || email === 'ninja@demo.ee') {
-      // 1. Peidame login-vaate
-      document.getElementById('login-screen').style.display = 'none';
-      // 2. Näitame põhisisu
-      document.getElementById('main-content').style.display = 'block';
-      // 3. Muudame tausta veidi sügavamaks
-      document.body.style.backgroundColor = "#0a0f0d";
+  function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    const text = document.getElementById('theme-text');
+    body.classList.toggle('dark-mode');
+    if (body.classList.contains('dark-mode')) {
+      icon.textContent = '☀️';
+      text.textContent = 'Hele režiim';
     } else {
-      alert("Demo parool on: demo123");
+      icon.textContent = '🌙';
+      text.textContent = 'Tume režiim';
     }
   }
 </script>
