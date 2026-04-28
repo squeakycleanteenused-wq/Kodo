@@ -28,22 +28,19 @@
     --border: #1F2F27;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background 0.3s, color 0.3s; }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: all 0.3s ease; }
 
   body { background-color: var(--bg-main); color: var(--text); min-height: 100vh; }
 
-  /* --- Sisselogimine --- */
-  #login-screen {
-    display: flex; min-height: 100vh; align-items: center; justify-content: center;
-    background: radial-gradient(circle at top right, #fdfcf9, #efebe3);
+  /* --- LOGIN SCREEN --- */
+  #login-screen { 
+    display: flex; min-height: 100vh; align-items: center; justify-content: center; padding: 20px; 
   }
-  body.dark-mode #login-screen { background: radial-gradient(circle at top right, #1a3326, #0f1713); }
-
+  
   .login-card {
     background: var(--bg-card); padding: 50px; border-radius: 30px;
     box-shadow: var(--shadow); width: 100%; max-width: 420px;
     border: 1px solid var(--border); text-align: center;
-    backdrop-filter: blur(10px);
   }
 
   h1 { font-family: 'Playfair Display', serif; font-size: 38px; margin-bottom: 10px; color: var(--forest); }
@@ -55,49 +52,37 @@
     width: 100%; padding: 16px; border-radius: 14px; border: 1px solid var(--border);
     background: var(--bg-main); color: var(--text); font-size: 16px; outline: none;
   }
-  .input-field:focus { border-color: var(--gold); }
 
   .btn {
     width: 100%; padding: 16px; border-radius: 14px; border: none;
     font-weight: 700; cursor: pointer; background: var(--forest); color: white;
-    font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 10px;
+    font-size: 16px; margin-top: 10px;
   }
-  .btn:hover { background: var(--gold); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(201,168,76,0.3); }
+  .btn:hover { background: var(--gold); transform: translateY(-2px); }
 
-  /* --- Dashboard --- */
-  #main-content { display: none; padding: 40px 20px; max-width: 1000px; margin: 0 auto; }
+  /* --- MAIN DASHBOARD --- */
+  #main-content { display: none; padding: 40px 20px; max-width: 1100px; margin: 0 auto; }
   
   .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-  .nav-btn { background: none; border: 1px solid var(--border); padding: 8px 16px; border-radius: 10px; cursor: pointer; color: var(--text); }
-
-  .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
-  .cat-card {
-    background: var(--bg-card); padding: 30px 20px; border-radius: 20px;
+  
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  .card {
+    background: var(--bg-card); padding: 25px; border-radius: 20px;
     border: 1px solid var(--border); cursor: pointer; text-align: center;
+    box-shadow: var(--shadow);
   }
-  .cat-card:hover { border-color: var(--gold); transform: scale(1.03); }
-  .cat-card span { font-size: 40px; display: block; margin-bottom: 10px; }
-
-  /* --- Teenusepakkujate list --- */
-  .pro-list { margin-top: 30px; display: none; }
-  .pro-card {
-    background: var(--bg-card); padding: 20px; border-radius: 15px;
-    border: 1px solid var(--border); margin-bottom: 15px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
+  .card:hover { border-color: var(--gold); transform: translateY(-5px); }
+  .card span { font-size: 45px; display: block; margin-bottom: 15px; }
 
   .hidden { display: none !important; }
-  #error-msg { color: #ff7675; font-size: 14px; margin-top: 15px; display: none; }
-
 </style>
 </head>
 <body>
 
 <div id="login-screen">
   <div class="login-card">
-    <div style="font-size: 40px; margin-bottom: 10px;">🥷</div>
     <h1>Koduninja</h1>
-    <p style="margin-bottom: 30px; color: var(--text-light);">Sisene demo-kontoga</p>
+    <p style="margin-bottom: 30px; color: var(--text-light);">Logi sisse demo-vaatesse</p>
     
     <div class="input-group">
       <label class="input-label">E-mail</label>
@@ -109,85 +94,66 @@
       <input id="password" class="input-field" type="password" value="demo123">
     </div>
     
-    <button class="btn" onclick="handleLogin()">Logi sisse</button>
-    <p id="error-msg">Vale kasutajatunnus või parool!</p>
+    <button class="btn" onclick="handleLogin()">Logi sisse →</button>
     
-    <div style="margin-top: 20px; font-size: 13px; color: var(--text-light);">
-        Demod: klient@demo.ee / tegija@demo.ee (parool: demo123)
-    </div>
+    <p id="error-msg" style="color: #e74c3c; margin-top: 15px; font-size: 14px; display: none;">Vale parool!</p>
   </div>
 </div>
 
 <div id="main-content">
   <div class="header">
-    <div>
-      <h2 id="greeting" style="font-family: 'Playfair Display', serif; font-size: 28px;">Tere tulemast!</h2>
-      <p id="role-tag" style="color: var(--gold); font-weight: 600; font-size: 14px; text-transform: uppercase;"></p>
-    </div>
-    <button class="nav-btn" onclick="location.reload()">Logi välja</button>
+    <h2 id="user-name" style="font-family: 'Playfair Display', serif;">Tere tulemast!</h2>
+    <button class="btn" style="width: auto; padding: 10px 20px; margin: 0;" onclick="location.reload()">Logi välja</button>
   </div>
 
-  <div id="client-view" class="hidden">
-    <h3 style="margin-bottom: 20px;">Mida sul täna vaja läheb?</h3>
-    <div class="category-grid">
-      <div class="cat-card" onclick="showPros('Koristus', '🧹')"><span>🧹</span>Koristus</div>
-      <div class="cat-card" onclick="showPros('Remont', '🛠️')"><span>🛠️</span>Remont</div>
-      <div class="cat-card" onclick="showPros('Aed', '🌱')"><span>🌱</span>Aiatööd</div>
-      <div class="cat-card" onclick="showPros('Ilu', '💇')"><span>💇</span>Iluteenused</div>
-    </div>
-
-    <div id="pro-list-container" class="pro-list">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-            <h3 id="selected-cat-title">Teenusepakkujad</h3>
-            <button onclick="hidePros()" style="background:none; border:none; color:var(--gold); cursor:pointer;">← Tagasi</button>
-        </div>
-        <div id="pro-cards-anchor"></div>
+  <div id="client-area" class="hidden">
+    <h3 style="margin-bottom: 25px;">Kuidas saame täna aidata?</h3>
+    <div class="grid">
+      <div class="card"><span>🧹</span><h4>Koristus</h4><p>Puhas kodu vaevata</p></div>
+      <div class="card"><span>🛠️</span><h4>Remont</h4><p>Kvalifitseeritud meistrid</p></div>
+      <div class="card"><span>🌱</span><h4>Aed</h4><p>Hoolitsetud väliruum</p></div>
     </div>
   </div>
 
-  <div id="pro-view" class="hidden">
+  <div id="pro-area" class="hidden">
     <div style="background: var(--forest); color: white; padding: 30px; border-radius: 20px; margin-bottom: 30px;">
-        <h3>Sinu tänane teenistus</h3>
-        <p style="font-size: 40px; font-weight: 700; margin: 10px 0;">145.00€</p>
-        <p style="opacity: 0.8;">3 lõpetatud tööd</p>
-    </div>
-    <h3>Uued pakkumised sinu piirkonnas:</h3>
-    <div class="pro-card" style="margin-top:20px;">
-        <div>
-            <div style="font-weight: 700;">Korteri suurpuhastus (54m²)</div>
-            <div style="font-size: 14px; color: var(--text-light);">📍 Kesklinn, Tallinn</div>
-        </div>
-        <div style="text-align: right;">
-            <div style="color: var(--gold); font-weight: 700;">65€</div>
-            <button class="nav-btn" style="margin-top:5px; background: var(--forest); color:white; border:none;">Võta vastu</button>
-        </div>
+        <h3>Sinu aktiivsed pakkumised</h3>
+        <p style="font-size: 32px; margin-top: 10px;">3 uut tellimust ootel</p>
     </div>
   </div>
 </div>
 
 <script>
-  // 1. Kasutajate andmed (Vana koodi loogika)
+  // Demo andmebaas
   const users = {
     'klient@demo.ee': { name: 'Mari Maasikas', role: 'klient', pass: 'demo123' },
-    'tegija@demo.ee': { name: 'Kalle Koduabi', role: 'tegija', pass: 'demo123' }
+    'tegija@demo.ee': { name: 'Kalle Kaevaja', role: 'tegija', pass: 'demo123' }
   };
 
-  // 2. Sisselogimise funktsioon
   function handleLogin() {
     const email = document.getElementById('email').value;
     const pass = document.getElementById('password').value;
     const error = document.getElementById('error-msg');
 
     if (users[email] && users[email].pass === pass) {
-      error.style.display = 'none';
-      startApp(users[email]);
+      // 1. Peida login
+      document.getElementById('login-screen').style.display = 'none';
+      // 2. Näita dashboardi
+      document.getElementById('main-content').style.display = 'block';
+      // 3. Määra nimi
+      document.getElementById('user-name').innerText = `Tere, ${users[email].name}!`;
+      
+      // 4. Näita õiget vaadet
+      if (users[email].role === 'klient') {
+        document.getElementById('client-area').classList.remove('hidden');
+      } else {
+        document.getElementById('pro-area').classList.remove('hidden');
+      }
     } else {
       error.style.display = 'block';
     }
   }
+</script>
 
-  // 3. Äpi käivitamine
-  function startApp(user) {
-    document.getElementById('login-screen').classList.add('hidden');
-    document.getElementById('main-content').style.display = 'block';
-    document.getElementById('greeting').innerText
+</body>
+</html>
