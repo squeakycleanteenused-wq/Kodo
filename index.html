@@ -4,96 +4,248 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Koduninja — Euroopa teenuste platvorm</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
 <style>
   :root {
-    --bg-main: #FDFCF9; --bg-card: rgba(255, 255, 255, 0.94);
-    --forest: #1A3326; --sage: #5C8A6E; --gold: #C9A84C;
-    --text: #2D3436; --text-light: #636E72; --border: #EFEBE3;
-    --shadow: 0 10px 30px rgba(26,51,38,0.05);
+    --bg-main: #FDFCF9;
+    --bg-card: rgba(255, 255, 255, 0.94);
+    --forest: #1A3326;
+    --sage: #5C8A6E;
+    --gold: #C9A84C;
+    --text: #2D3436; 
+    --text-light: #636E72;
+    --border: #EFEBE3;
+    --shadow: 0 10px 40px rgba(26,51,38,0.08);
   }
-  body.dark-mode {
-    --bg-main: #0F1713; --bg-card: rgba(24, 38, 32, 0.95);
-    --text: #EFEBE3; --text-light: #A0AEC0; --border: #1F2F27;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: all 0.3s ease; }
-  body { background-color: var(--bg-main); color: var(--text); min-height: 100vh; }
 
-  /* Login */
-  #login-screen { display: flex; min-height: 100vh; align-items: center; justify-content: center; padding: 20px; }
-  .login-card { background: var(--bg-card); padding: 50px; border-radius: 30px; box-shadow: var(--shadow); width: 100%; max-width: 420px; border: 1px solid var(--border); text-align: center; }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+
+  body { 
+    background-color: var(--bg-main); 
+    color: var(--text); 
+    min-height: 100vh;
+    background-image: radial-gradient(circle at 2px 2px, var(--border) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+
+  /* --- Sisselogimise ekraan --- */
+  #login-screen {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .login-card {
+    background: var(--bg-card);
+    padding: 60px 40px;
+    border-radius: 40px;
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 450px;
+    border: 1px solid var(--border);
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+
+  h1 { 
+    font-family: 'Playfair Display', serif; 
+    font-size: 42px; 
+    color: var(--forest); 
+    margin-bottom: 10px;
+  }
+
+  .input-group { text-align: left; margin-bottom: 25px; }
+  .input-label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; color: var(--forest); }
   
-  /* Sisu */
-  #main-content { display: none; padding: 40px 20px; max-width: 1100px; margin: 0 auto; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
-  .card { background: var(--bg-card); padding: 25px; border-radius: 20px; border: 1px solid var(--border); cursor: pointer; text-align: center; }
-  .card:hover { border-color: var(--gold); transform: translateY(-5px); }
-  
-  .btn { width: 100%; padding: 16px; border-radius: 14px; border: none; font-weight: 700; cursor: pointer; background: var(--forest); color: white; font-size: 16px; margin-top: 10px; }
-  .btn:hover { background: var(--gold); }
-  .input-field { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid var(--border); margin-bottom: 20px; background: var(--bg-main); color: var(--text); }
+  .input-field {
+    width: 100%;
+    padding: 18px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: white;
+    font-size: 16px;
+    transition: all 0.3s;
+  }
+
+  .input-field:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 4px rgba(201,168,76,0.1); }
+
+  .btn-ninja {
+    width: 100%;
+    padding: 18px;
+    border-radius: 16px;
+    border: none;
+    background: var(--forest);
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(26,51,38,0.2);
+  }
+
+  .btn-ninja:hover { background: var(--gold); transform: translateY(-2px); }
+
+  /* --- Dashboard --- */
+  #main-content { display: none; padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
+
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
+
+  .greeting-text h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--forest); }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+
+  .service-card {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: all 0.4s;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+
+  .service-card:hover { 
+    transform: translateY(-10px); 
+    border-color: var(--gold); 
+    box-shadow: 0 20px 40px rgba(201,168,76,0.1);
+  }
+
+  .service-card .icon { font-size: 50px; margin-bottom: 20px; display: block; }
+  .service-card h4 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 10px; }
+
+  .logout-link { color: var(--text-light); text-decoration: none; font-weight: 600; cursor: pointer; }
+  .logout-link:hover { color: var(--gold); }
+
   .hidden { display: none !important; }
+
+  /* Pro paneel */
+  .pro-banner {
+    background: var(--forest);
+    color: white;
+    padding: 40px;
+    border-radius: 30px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pro-banner::after {
+    content: 'N';
+    position: absolute;
+    right: -20px;
+    bottom: -40px;
+    font-size: 200px;
+    font-family: 'Playfair Display';
+    opacity: 0.1;
+  }
 </style>
 </head>
 <body>
 
 <div id="login-screen">
   <div class="login-card">
-    <h1 style="font-family: 'Playfair Display', serif; font-size: 38px; color: var(--forest);">Koduninja</h1>
-    <p style="margin-bottom: 30px; color: var(--text-light);">Logi sisse demo-vaatesse</p>
-    <input id="email" class="input-field" type="email" value="klient@demo.ee">
-    <input id="password" class="input-field" type="password" value="demo123">
-    <button class="btn" onclick="handleLogin()">Logi sisse →</button>
+    <div style="font-size: 40px; margin-bottom: 15px;">🥷</div>
+    <h1>Koduninja</h1>
+    <p style="color: var(--text-light); margin-bottom: 40px;">Eksklusiivne teenuste platvorm</p>
+    
+    <div class="input-group">
+      <label class="input-label">E-mail</label>
+      <input id="email" class="input-field" type="email" value="klient@demo.ee">
+    </div>
+    
+    <div class="input-group">
+      <label class="input-label">Parool</label>
+      <input id="password" class="input-field" type="password" value="demo123">
+    </div>
+    
+    <button class="btn-ninja" onclick="handleLogin()">Sisene portaali</button>
+    <p id="err" style="color: #e74c3c; font-size: 14px; margin-top: 15px; display: none;">Sisselogimine ebaõnnestus!</p>
   </div>
 </div>
 
 <div id="main-content">
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
-    <h2 id="user-name" style="font-family: 'Playfair Display', serif; font-size: 32px;">Tere tulemast!</h2>
-    <button onclick="location.reload()" style="background:none; border:1px solid var(--border); padding:10px 20px; border-radius:10px; cursor:pointer; color:var(--text);">Logi välja</button>
+  <div class="header">
+    <div class="greeting-text">
+      <h2 id="welcome-name">Tere tulemast!</h2>
+      <p id="role-text" style="color: var(--gold); font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;"></p>
+    </div>
+    <a class="logout-link" onclick="location.reload()">Logi välja</a>
   </div>
 
-  <div id="client-area" class="hidden">
-    <h3>Vali teenus:</h3>
+  <div id="view-klient" class="hidden">
+    <h3 style="margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 26px;">Kuidas saame täna kasulikud olla?</h3>
     <div class="grid">
-      <div class="card"><span>🧹</span><h4>Koristus</h4></div>
-      <div class="card"><span>🛠️</span><h4>Remont</h4></div>
-      <div class="card"><span>🌱</span><h4>Aed</h4></div>
+      <div class="service-card">
+        <span class="icon">🧹</span>
+        <h4>Koristus</h4>
+        <p style="color: var(--text-light);">Luksuslik puhtus sinu kodus</p>
+      </div>
+      <div class="service-card">
+        <span class="icon">🛠️</span>
+        <h4>Remont</h4>
+        <p style="color: var(--text-light);">Meistrid, keda usaldatakse</p>
+      </div>
+      <div class="service-card">
+        <span class="icon">🌿</span>
+        <h4>Aiatööd</h4>
+        <p style="color: var(--text-light);">Sinu roheline oaas</p>
+      </div>
     </div>
   </div>
 
-  <div id="pro-area" class="hidden">
-      <div style="background: var(--forest); color: white; padding: 40px; border-radius: 20px;">
-          <h3>Ninja paneel</h3>
-          <p>Sul on 3 uut tööpakkumist!</p>
-      </div>
+  <div id="view-tegija" class="hidden">
+    <div class="pro-banner">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 32px;">Ninja Paneel</h3>
+        <p style="font-size: 18px; margin-top: 10px; opacity: 0.9;">Sul on 3 uut tööpakkumist ootel.</p>
+        <button class="btn-ninja" style="width: auto; margin-top: 20px; background: var(--gold); padding: 12px 30px;">Vaata töid</button>
+    </div>
+    <div class="grid">
+        <div class="service-card" style="text-align: left;">
+            <p style="color: var(--gold); font-weight: 700;">TÄNA 14:00</p>
+            <h4 style="margin-top: 5px;">Korteri koristus</h4>
+            <p>📍 Tallinn, Narva mnt</p>
+            <hr style="margin: 15px 0; border: 0; border-top: 1px solid var(--border);">
+            <p style="font-weight: 700; font-size: 20px;">Tasu: 65.00€</p>
+        </div>
+    </div>
   </div>
 </div>
 
 <script>
+  // Vana Kodo andmed
   const users = {
     'klient@demo.ee': { name: 'Mari Maasikas', role: 'klient', pass: 'demo123' },
     'tegija@demo.ee': { name: 'Kalle Koduabi', role: 'tegija', pass: 'demo123' }
   };
 
   function handleLogin() {
-    const email = document.getElementById('email').value;
-    const pass = document.getElementById('password').value;
+    const e = document.getElementById('email').value;
+    const p = document.getElementById('password').value;
+    const err = document.getElementById('err');
 
-    if (users[email] && users[email].pass === pass) {
+    if (users[e] && users[e].pass === p) {
+      err.style.display = 'none';
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('main-content').style.display = 'block';
-      document.getElementById('user-name').innerText = "Tere, " + users[email].name + "!";
       
-      if (users[email].role === 'klient') {
-        document.getElementById('client-area').classList.remove('hidden');
+      document.getElementById('welcome-name').innerText = "Tere, " + users[e].name + "!";
+      document.getElementById('role-text').innerText = users[e].role === 'klient' ? "Eraisik" : "Teenusepakkuja";
+
+      if (users[e].role === 'klient') {
+        document.getElementById('view-klient').classList.remove('hidden');
       } else {
-        document.getElementById('pro-area').classList.remove('hidden');
+        document.getElementById('view-tegija').classList.remove('hidden');
       }
     } else {
-      alert("Vale parool või e-mail!");
+      err.style.display = 'block';
     }
   }
 </script>
+
 </body>
 </html>
