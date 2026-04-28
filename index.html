@@ -5,142 +5,179 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Koduninja — Euroopa teenuste platvorm</title>
 
-<style>
-  /* --- SIIN ON SINU CSS2.CSS SISU OTSE KOODIS --- */
-  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
+<style>/* --- KODUNINJA TÄIELIK KUJUNDUSKOOD --- */
 
-  :root {
-    --bg-main: #FDFCF9;
-    --bg-card: rgba(255, 255, 255, 0.94);
-    --forest: #1A3326;
-    --sage: #5C8A6E;
-    --gold: #C9A84C;
-    --text: #2D3436; 
-    --text-light: #636E72;
-    --border: #EFEBE3;
-    --pattern-color: #1A3326; 
-    --pattern-opacity: 0.15; 
-    --shadow: 0 10px 30px rgba(26,51,38,0.05);
+/* 1. FONDID (Outfit ja Playfair Display) */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
+
+:root {
+  /* Hele režiim - Zen vaib */
+  --bg-main: #FDFCF9;
+  --bg-card: rgba(255, 255, 255, 0.94);
+  --forest: #1A3326;
+  --sage: #5C8A6E;
+  --gold: #C9A84C;
+  --text: #2D3436; 
+  --text-light: #636E72;
+  --border: #EFEBE3;
+  --pattern-color: #1A3326; 
+  --pattern-opacity: 0.15; 
+  --shadow: 0 10px 30px rgba(26,51,38,0.05);
+}
+
+/* Tume režiim - Ninja vaib */
+body.dark-mode {
+  --bg-main: #0F1713;
+  --bg-card: rgba(24, 38, 32, 0.95);
+  --forest: #EFEBE3;
+  --sage: #A0AEC0;
+  --gold: #C9A84C;
+  --text: #EFEBE3;
+  --text-light: #A0AEC0;
+  --border: #1F2F27;
+  --pattern-color: #C9A84C;
+  --pattern-opacity: 0.05;
+  --shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+/* 2. ÜLDINE STIIL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.3s ease;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text);
+  min-height: 100vh;
+  /* See peen täpiline muster taustal */
+  background-image: radial-gradient(circle at 2px 2px, var(--pattern-color) 1px, transparent 0);
+  background-size: 40px 40px;
+  line-height: 1.6;
+}
+
+/* 3. LOGIN KAART */
+.login-card {
+  background: var(--bg-card);
+  padding: 60px 50px;
+  border-radius: 40px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 460px;
+  border: 1px solid var(--border);
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--forest);
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+body.dark-mode h1 {
+  color: var(--gold);
+}
+
+/* 4. SISENDVÄLJAD */
+.input-group {
+  text-align: left;
+  margin-bottom: 25px;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--sage);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-size: 16px;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(201,168,76,0.1);
+}
+
+/* 5. NUPUD */
+.btn {
+  width: 100%;
+  padding: 20px;
+  border-radius: 16px;
+  border: none;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--forest);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(26,51,38,0.2);
+}
+
+body.dark-mode .btn-primary {
+  background: var(--gold);
+  color: var(--forest);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(201,168,76,0.3);
+}
+
+/* 6. DASHBOARD JA KAARDID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 20px;
+}
+
+.card {
+  background: var(--bg-card);
+  padding: 40px;
+  border-radius: 35px;
+  border: 1px solid var(--border);
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.card:hover {
+  border-color: var(--gold);
+  transform: translateY(-10px);
+}
+
+</style> <script>
+  function handleLogin() {
+    document.getElementById('login-view').style.display = 'none';
+    document.getElementById('main-view').style.display = 'block';
   }
 
-  body.dark-mode {
-    --bg-main: #0F1713;
-    --bg-card: rgba(24, 38, 32, 0.95);
-    --text: #EFEBE3;
-    --text-light: #A0AEC0;
-    --border: #1F2F27;
-    --pattern-color: #C9A84C;
-    --pattern-opacity: 0.05;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: all 0.3s ease; }
-
-  body {
-    background-color: var(--bg-main);
-    color: var(--text);
-    min-height: 100vh;
-    background-image: radial-gradient(circle at 2px 2px, var(--pattern-color) 1px, transparent 0);
-    background-size: 40px 40px;
-    display: flex; flex-direction: column;
-  }
-
-  /* --- LOGIN ELEMENTIDE KUJUNDUS --- */
-  #login-screen {
-    display: flex; flex: 1; align-items: center; justify-content: center; padding: 20px;
-  }
-
-  .login-card {
-    background: var(--bg-card); padding: 50px; border-radius: 40px;
-    box-shadow: var(--shadow); width: 100%; max-width: 450px;
-    border: 1px solid var(--border); text-align: center; backdrop-filter: blur(10px);
-  }
-
-  h1 { font-family: 'Playfair Display', serif; font-size: 42px; color: var(--forest); margin-bottom: 10px; }
-  body.dark-mode h1 { color: var(--gold); }
-
-  .input-field {
-    width: 100%; padding: 18px; border-radius: 16px; border: 1px solid var(--border);
-    background: var(--bg-main); color: var(--text); font-size: 16px; margin-bottom: 15px;
-  }
-
-  .btn {
-    width: 100%; padding: 18px; border-radius: 16px; border: none;
-    font-weight: 700; cursor: pointer; background: var(--forest); color: white;
-    font-size: 16px; text-transform: uppercase; letter-spacing: 1px;
-  }
-  body.dark-mode .btn { background: var(--gold); color: var(--forest); }
-
-  /* --- DASHBOARD ELEMENTIDE KUJUNDUS --- */
-  #dashboard {
-    display: none; padding: 40px 20px; max-width: 1100px; margin: 0 auto; width: 100%;
-  }
-
-  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
-  
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-  
-  .card {
-    background: var(--bg-card); padding: 40px; border-radius: 30px;
-    border: 1px solid var(--border); text-align: center; cursor: pointer;
-    box-shadow: var(--shadow);
-  }
-  .card:hover { border-color: var(--gold); transform: translateY(-10px); }
-  .card span { font-size: 50px; display: block; margin-bottom: 20px; }
-
-  .theme-switch {
-    position: fixed; top: 20px; right: 20px; padding: 10px 20px;
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 12px; cursor: pointer; font-weight: 600; z-index: 100;
-  }
-</style>
-</head>
-<body class="dark-mode">
-
-<button class="theme-switch" onclick="document.body.classList.toggle('dark-mode')">🌓 Teema</button>
-
-<div id="login-screen">
-  <div class="login-card">
-    <h1>Koduninja</h1>
-    <p style="color: var(--text-light); margin-bottom: 40px;">Eksklusiivne teenuste platvorm</p>
-    <input type="email" class="input-field" placeholder="E-mail" value="demo@klient.ee">
-    <input type="password" class="input-field" placeholder="Parool" value="demo123">
-    <button class="btn" onclick="sisene()">Logi sisse →</button>
-  </div>
-</div>
-
-<div id="dashboard">
-  <div class="header">
-    <div>
-      <h2 style="font-family: 'Playfair Display', serif; font-size: 36px;">Tere tulemast!</h2>
-      <p style="color: var(--gold); font-weight: 700; font-size: 14px; text-transform: uppercase;">Ninja Dashboard</p>
-    </div>
-    <button class="btn" style="width: auto; padding: 10px 20px;" onclick="location.reload()">Logi välja</button>
-  </div>
-
-  <div class="grid">
-    <div class="card">
-      <span>🧹</span>
-      <h3>Koristus</h3>
-      <p style="color: var(--text-light); margin-top: 10px;">Luksuslik puhtus Sinu kodus</p>
-    </div>
-    <div class="card">
-      <span>🛠️</span>
-      <h3>Remont</h3>
-      <p style="color: var(--text-light); margin-top: 10px;">Meistrid, keda saad usaldada</p>
-    </div>
-    <div class="card">
-      <span>🌿</span>
-      <h3>Aiatööd</h3>
-      <p style="color: var(--text-light); margin-top: 10px;">Sinu roheline oaas</p>
-    </div>
-  </div>
-</div>
-
-<script>
-  function sisene() {
-    // See peidab logini ja näitab sisu, kasutades KOGU stiili
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
+  function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
   }
 </script>
 
