@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Koduninja — Euroopa teenuste platvorm</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --bg-main: #0F1713;
@@ -17,11 +19,11 @@
     --shadow: 0 15px 45px rgba(0,0,0,0.4);
   }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+
   body {
     background-color: var(--bg-main);
     color: var(--text);
-    margin: 0;
-    font-family: 'Outfit', sans-serif;
     min-height: 100vh;
     background-image: radial-gradient(circle at 2px 2px, #1A3326 1px, transparent 0);
     background-size: 40px 40px;
@@ -40,21 +42,21 @@
   .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
   
   /* Teenuste valik */
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
   .category-card {
-    background: var(--bg-card); padding: 30px; border-radius: 25px;
+    background: var(--bg-card); padding: 35px 20px; border-radius: 25px;
     border: 1px solid var(--border); cursor: pointer; text-align: center;
     transition: 0.3s;
   }
   .category-card:hover { border-color: var(--gold); transform: translateY(-5px); background: #1a2a22; }
-  .category-card span { font-size: 45px; display: block; margin-bottom: 15px; }
+  .category-card span { font-size: 50px; display: block; margin-bottom: 15px; }
 
-  /* SEE ON SEE OSA, MIS PILDIL OLI - PRO LIST */
+  /* Pro list - see, mis pildil puudu oli */
   .pro-card {
     background: var(--bg-card); padding: 25px; border-radius: 20px;
     border: 1px solid var(--border); margin-bottom: 15px;
     display: flex; justify-content: space-between; align-items: center;
-    transition: 0.3s;
+    transition: 0.3s; flex-wrap: wrap; gap: 15px;
   }
   .pro-card:hover { border-color: var(--gold); }
   
@@ -70,18 +72,19 @@
   }
 
   .hidden { display: none !important; }
-  h1, h2, h3 { font-family: 'Playfair Display', serif; }
+  h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
 </style>
 </head>
 <body>
 
 <div id="login-screen">
   <div class="login-card">
-    <h1 style="color: var(--gold); font-size: 40px;">Koduninja</h1>
-    <p style="color: var(--text-light); margin-bottom: 35px;">Eksklusiivne teenuste portaal</p>
+    <div style="font-size: 40px; margin-bottom: 10px;">🥷</div>
+    <h1 style="color: var(--gold); font-size: 40px; margin-bottom: 10px;">Koduninja</h1>
+    <p style="color: var(--text-light); margin-bottom: 35px;">Logi sisse demo andmetega</p>
     <input id="email" style="width:100%; padding:16px; margin-bottom:15px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,0.03); color:white;" type="email" value="klient@demo.ee">
     <input id="password" style="width:100%; padding:16px; margin-bottom:25px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,0.03); color:white;" type="password" value="demo123">
-    <button class="btn-ninja" onclick="handleLogin()">Sisene</button>
+    <button class="btn-ninja" onclick="handleLogin()">Sisene portaali</button>
   </div>
 </div>
 
@@ -89,19 +92,110 @@
   <div class="header">
     <div>
       <h2 id="welcome" style="font-size: 36px; color: var(--gold);">Tere tulemast!</h2>
-      <p style="color: var(--text-light); text-transform: uppercase; font-size: 12px; letter-spacing: 2px;">Ninja Klient</p>
+      <p id="role-display" style="color: var(--text-light); text-transform: uppercase; font-size: 12px; letter-spacing: 2px;"></p>
     </div>
-    <button onclick="location.reload()" style="background:none; border:1px solid var(--gold); color:var(--gold); padding:8px 20px; border-radius:10px; cursor:pointer;">Logi välja</button>
+    <button onclick="location.reload()" style="background:none; border:1px solid var(--gold); color:var(--gold); padding:8px 15px; border-radius:10px; cursor:pointer; font-weight: 700;">LOGI VÄLJA</button>
   </div>
 
-  <div id="cat-view">
-    <h3 style="margin-bottom: 30px;">Vali vajalik teenus:</h3>
-    <div class="grid">
-      <div class="category-card" onclick="showCategory('koristus')"><span>🧹</span><h4>Koristus</h4></div>
-      <div class="category-card" onclick="showCategory('ehitus')"><span>🛠️</span><h4>Remont</h4></div>
-      <div class="category-card" onclick="showCategory('transport')"><span>🚚</span><h4>Transport</h4></div>
+  <div id="view-klient" class="hidden">
+    <div id="cat-selector">
+      <h3 style="margin-bottom: 30px; font-size: 28px;">Millist abi te täna vajate?</h3>
+      <div class="grid">
+        <div class="category-card" onclick="showPros('koristus')"><span>🧹</span><h4>Koristus</h4></div>
+        <div class="category-card" onclick="showPros('ehitus')"><span>🛠️</span><h4>Remont</h4></div>
+        <div class="category-card" onclick="showPros('transport')"><span>🚚</span><h4>Transport</h4></div>
+        <div class="category-card" onclick="showPros('it')"><span>💻</span><h4>IT abi</h4></div>
+      </div>
+    </div>
+
+    <div id="pro-list-area" class="hidden">
+      <button onclick="backToCats()" style="background:none; border:none; color:var(--gold); cursor:pointer; margin-bottom:25px; font-weight:700; font-size: 15px;">← TAGASI VALIKUSSE</button>
+      <h3 id="cat-title" style="margin-bottom:30px; font-size: 32px; color: var(--gold);">Pakkujad</h3>
+      <div id="pro-anchor"></div>
     </div>
   </div>
 
-  <div id="pro-view" class="hidden">
-    <button onclick="backToCats()" style="background:none; border:none; color:var(--gold); cursor:pointer; margin-bottom:20px
+  <div id="view-tegija" class="hidden">
+    <div style="background: var(--gold); color: var(--forest); padding: 40px; border-radius: 30px; margin-bottom: 40px;">
+        <h2 style="margin-bottom: 10px;">Ninja töölaud</h2>
+        <p style="font-weight: 700;">Sul on aktiivne teenistus: 145.00€</p>
+    </div>
+    <h3>Uued tellimused:</h3>
+    <div class="pro-card" style="margin-top:20px;">
+        <div style="font-weight:700;">Korteri suurpuhastus · Tallinn · 65.00€</div>
+        <button class="btn-ninja" style="width:auto; padding:10px 20px;">Võta vastu</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const users = {
+    'klient@demo.ee': { name: 'Mari Maasikas', role: 'klient', pass: 'demo123' },
+    'tegija@demo.ee': { name: 'Kalle Koduabi', role: 'tegija', pass: 'demo123' }
+  };
+
+  const pakkujad = {
+    'koristus': [
+      { nimi: 'Puhastusproff OÜ', hind: 25, hinnang: 4.9, asukoht: 'Tallinn', kiir: '1h', emoji: '✨' },
+      { nimi: 'KoduSära Mari', hind: 22, hinnang: 4.7, asukoht: 'Tartu', kiir: '2h', emoji: '🧹' }
+    ],
+    'ehitus': [
+      { nimi: 'Meistrimees Ants', hind: 35, hinnang: 5.0, asukoht: 'Harjumaa', kiir: 'Plaanitav', emoji: '🔨' },
+      { nimi: 'Remondiabi Grupp', hind: 45, hinnang: 4.8, asukoht: 'Tallinn', kiir: 'Kiire', emoji: '🏗️' }
+    ],
+    'transport': [
+      { nimi: 'Kiire Kaubik', hind: 30, hinnang: 4.6, asukoht: 'Eesti', kiir: '15min', emoji: '🚚' }
+    ],
+    'it': [
+      { nimi: 'IT-Ninja Markus', hind: 50, hinnang: 4.9, asukoht: 'Kaugöö', kiir: 'Kohe', emoji: '💻' }
+    ]
+  };
+
+  function handleLogin() {
+    const e = document.getElementById('email').value;
+    const p = document.getElementById('password').value;
+    if (users[e] && users[e].pass === p) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+      document.getElementById('welcome').innerText = "Tere, " + users[e].name + "!";
+      document.getElementById('role-display').innerText = users[e].role === 'klient' ? "Ninja Klient" : "Ninja Teenusepakkuja";
+      if(users[e].role === 'klient') document.getElementById('view-klient').classList.remove('hidden');
+      else document.getElementById('view-tegija').classList.remove('hidden');
+    } else alert("Vale parool või kasutaja!");
+  }
+
+  function showPros(cat) {
+    document.getElementById('cat-selector').classList.add('hidden');
+    document.getElementById('pro-list-area').classList.remove('hidden');
+    document.getElementById('cat-title').innerText = cat.charAt(0).toUpperCase() + cat.slice(1);
+    const anchor = document.getElementById('pro-anchor');
+    anchor.innerHTML = '';
+    pakkujad[cat].forEach(p => {
+      const finalPrice = (p.hind * 1.08).toFixed(2);
+      anchor.innerHTML += `
+        <div class="pro-card">
+          <div class="pro-info">
+            <div class="pro-emoji">${p.emoji}</div>
+            <div>
+              <div style="font-weight:700; font-size:18px;">${p.nimi} <span class="badge">KONTROLLITUD</span></div>
+              <div style="font-size:13px; color:var(--text-light); margin-top:4px;">
+                📍 ${p.asukoht} · ⭐ ${p.hinnang} · ⏱️ ${p.kiir}
+              </div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="color:var(--gold); font-weight:800; font-size:24px;">${finalPrice}€/h</div>
+            <div style="font-size:10px; opacity:0.6;">sisaldab teenustasu</div>
+            <button style="background:var(--gold); color:var(--forest); border:none; padding:8px 15px; border-radius:8px; margin-top:8px; font-weight:700; cursor:pointer;">VALI</button>
+          </div>
+        </div>`;
+    });
+  }
+
+  function backToCats() {
+    document.getElementById('pro-list-area').classList.add('hidden');
+    document.getElementById('cat-selector').classList.remove('hidden');
+  }
+</script>
+</body>
+</html>
