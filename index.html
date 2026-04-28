@@ -18,7 +18,7 @@
     --text-light: #636E72;
     --border: #EFEBE3;
     --pattern-color: #1A3326; 
-    --pattern-opacity: 0.1; 
+    --pattern-opacity: 0.15; 
     --shadow: 0 10px 30px rgba(26,51,38,0.05);
   }
 
@@ -32,7 +32,7 @@
     --pattern-opacity: 0.05;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: all 0.2s ease; }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: all 0.3s ease; }
 
   body {
     background-color: var(--bg-main);
@@ -42,7 +42,7 @@
     background-size: 40px 40px;
   }
 
-  /* Login Screen */
+  /* --- LOGIN SCREEN --- */
   #login-screen { display: flex; min-height: 100vh; align-items: center; justify-content: center; padding: 20px; }
   .login-card {
     background: var(--bg-card); padding: 50px; border-radius: 40px;
@@ -50,56 +50,70 @@
     border: 1px solid var(--border); text-align: center; backdrop-filter: blur(10px);
   }
 
-  /* Main Content Area */
-  #main-content { display: none; padding: 40px 20px; max-width: 1100px; margin: 0 auto; }
-  
-  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
-  
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-  .card {
-    background: var(--bg-card); padding: 40px 30px; border-radius: 30px;
-    border: 1px solid var(--border); text-align: center; cursor: pointer;
-    box-shadow: var(--shadow);
-  }
-  .card:hover { border-color: var(--gold); transform: translateY(-10px); }
-  .card span { font-size: 50px; display: block; margin-bottom: 20px; }
+  h1 { font-family: 'Playfair Display', serif; font-size: 42px; margin-bottom: 10px; color: var(--forest); }
+  body.dark-mode h1 { color: var(--gold); }
 
-  /* Pro Card Style (Vana koodi sisu uues kuues) */
-  .pro-card {
-    background: var(--bg-card); padding: 25px; border-radius: 20px;
-    border: 1px solid var(--border); margin-bottom: 15px;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 15px;
+  .input-group { text-align: left; margin-bottom: 25px; }
+  .input-label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; color: var(--sage); }
+  .input-field {
+    width: 100%; padding: 18px; border-radius: 16px; border: 1px solid var(--border);
+    background: var(--bg-main); color: var(--text); font-size: 16px; outline: none;
   }
+  .input-field:focus { border-color: var(--gold); }
 
   .btn {
-    padding: 15px 30px; border-radius: 14px; border: none;
+    width: 100%; padding: 18px; border-radius: 16px; border: none;
     font-weight: 700; cursor: pointer; background: var(--forest); color: white;
-    text-transform: uppercase; letter-spacing: 1px;
+    font-size: 16px; text-transform: uppercase; letter-spacing: 1px;
   }
   body.dark-mode .btn { background: var(--gold); color: var(--forest); }
 
-  .hidden { display: none !important; }
-  h1, h2, h3 { font-family: 'Playfair Display', serif; }
-
-  .theme-switch {
-    position: fixed; top: 20px; right: 20px; padding: 10px;
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 12px; cursor: pointer; z-index: 100;
+  /* --- MAIN CONTENT (DASHBOARD) --- */
+  #main-content { display: none; padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
+  
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+  .card {
+    background: var(--bg-card); padding: 40px; border-radius: 35px;
+    border: 1px solid var(--border); text-align: center; cursor: pointer; box-shadow: var(--shadow);
   }
+  .card:hover { border-color: var(--gold); transform: translateY(-10px); }
+  .card span { font-size: 55px; display: block; margin-bottom: 20px; }
+
+  /* --- TEENUSETABEL (PRO LIST) --- */
+  .pro-card {
+    background: var(--bg-card); padding: 25px; border-radius: 25px;
+    border: 1px solid var(--border); margin-bottom: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .pro-info { display: flex; align-items: center; gap: 20px; }
+  .pro-avatar { width: 60px; height: 60px; background: var(--forest); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; border: 1px solid var(--gold); }
+  
+  .hidden { display: none !important; }
+  h2, h3 { font-family: 'Playfair Display', serif; }
+
+  /* Theme Toggle */
+  .theme-btn { position: fixed; top: 20px; right: 20px; padding: 10px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; cursor: pointer; z-index: 1000; }
 </style>
 </head>
 <body class="dark-mode">
 
-<button class="theme-switch" onclick="toggleTheme()">🌓</button>
+<button class="theme-btn" onclick="toggleTheme()">🌓 Vaheta režiimi</button>
 
 <div id="login-screen">
   <div class="login-card">
-    <h1 style="color: var(--gold);">Koduninja</h1>
-    <p style="color: var(--text-light); margin-bottom: 40px;">Eksklusiivne teenuste platvorm</p>
-    <input id="email" style="width:100%; padding:18px; margin-bottom:15px; border-radius:15px; border:1px solid var(--border); background:var(--bg-main); color:var(--text);" type="email" value="demo@klient.ee">
-    <input id="password" style="width:100%; padding:18px; margin-bottom:25px; border-radius:15px; border:1px solid var(--border); background:var(--bg-main); color:var(--text);" type="password" value="demo123">
-    <button class="btn" style="width:100%" onclick="handleLogin()">Logi sisse →</button>
+    <h1>Koduninja</h1>
+    <p style="color: var(--text-light); margin-bottom: 35px;">Eksklusiivne teenuste platvorm</p>
+    <div class="input-group">
+      <label class="input-label">Kasutajatunnus</label>
+      <input id="login-user" class="input-field" type="email" value="klient@demo.ee">
+    </div>
+    <div class="input-group">
+      <label class="input-label">Parool</label>
+      <input id="login-pass" class="input-field" type="password" value="demo123">
+    </div>
+    <button class="btn" onclick="handleLogin()">Logi sisse →</button>
   </div>
 </div>
 
@@ -107,76 +121,78 @@
   <div class="header">
     <div>
       <h2 style="font-size: 36px;">Tere tulemast!</h2>
-      <p style="color: var(--gold); font-weight: 700; font-size: 14px;">ERAISIKU VAADE</p>
+      <p style="color: var(--gold); font-weight: 700; font-size: 12px; letter-spacing: 2px;">NINJA PORTAAL</p>
     </div>
-    <button class="btn" style="padding: 10px 20px;" onclick="location.reload()">Logi välja</button>
+    <button class="btn" style="width: auto; padding: 10px 25px;" onclick="location.reload()">Logi välja</button>
   </div>
 
-  <div id="cat-selector">
-    <h3 style="margin-bottom: 30px;">Vali teenuse kategooria:</h3>
+  <div id="category-section">
+    <h3 style="margin-bottom: 30px; font-size: 28px;">Millist abi te täna vajate?</h3>
     <div class="grid">
-      <div class="card" onclick="showPros('koristus')"><span>🧹</span><h3>Koristus</h3></div>
-      <div class="card" onclick="showPros('ehitus')"><span>🛠️</span><h3>Remont</h3></div>
-      <div class="card" onclick="showPros('transport')"><span>🚚</span><h3>Transport</h3></div>
+      <div class="card" onclick="showPros('koristus', '🧹')"><span>🧹</span><h3>Koristus</h3></div>
+      <div class="card" onclick="showPros('ehitus', '🛠️')"><span>🛠️</span><h4>Remont</h4></div>
+      <div class="card" onclick="showPros('it', '💻')"><span>💻</span><h4>IT ja abi</h4></div>
     </div>
   </div>
 
-  <div id="pro-area" class="hidden">
-    <button onclick="backToCats()" style="background:none; border:none; color:var(--gold); cursor:pointer; margin-bottom:20px; font-weight:700;">← TAGASI</button>
+  <div id="pro-list-section" class="hidden">
+    <button onclick="backToCats()" style="background:none; border:none; color:var(--gold); cursor:pointer; margin-bottom:25px; font-weight:700;">← TAGASI KATEGOORIATESSE</button>
     <h3 id="cat-title" style="margin-bottom:30px; font-size: 32px; color: var(--gold);">Teenusepakkujad</h3>
     <div id="pro-anchor"></div>
   </div>
 </div>
 
 <script>
-  // KOGU VANA KODO SISU (Tegijad, tärnid, asukohad)
-  const pakkujad = {
+  // See on see "mootor", mis Githubi koodis puudu oli
+  const proData = {
     'koristus': [
-      { nimi: 'Puhastusproff OÜ', hind: 25, hinnang: 4.9, asukoht: 'Tallinn', kiir: '1h', emoji: '✨' },
-      { nimi: 'KoduSära Mari', hind: 22, hinnang: 4.7, asukoht: 'Tartu', kiir: '2h', emoji: '🧹' }
+      { nimi: 'Puhastusproff OÜ', hind: 25, hinnang: 4.9, asukoht: 'Tallinn', emoji: '✨' },
+      { nimi: 'KoduSära Mari', hind: 22, hinnang: 4.7, asukoht: 'Tartu', emoji: '🧹' }
     ],
     'ehitus': [
-      { nimi: 'Meistrimees Ants', hind: 35, hinnang: 5.0, asukoht: 'Harjumaa', kiir: 'Plaanitav', emoji: '🔨' }
+      { nimi: 'Meistrimees Ants', hind: 35, hinnang: 5.0, asukoht: 'Harjumaa', emoji: '🔨' }
     ],
-    'transport': [
-      { nimi: 'Kiire Kaubik', hind: 30, hinnang: 4.6, asukoht: 'Eesti', kiir: '15min', emoji: '🚚' }
+    'it': [
+      { nimi: 'Ninja IT-Abi', hind: 45, hinnang: 4.9, asukoht: 'Kaugöö', emoji: '💻' }
     ]
   };
 
   function handleLogin() {
+    // See peidab sisselogimise ja avab sisu - püsides samas stiilis
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('main-content').style.display = 'block';
   }
 
-  function showPros(cat) {
-    document.getElementById('cat-selector').classList.add('hidden');
-    document.getElementById('pro-area').classList.remove('hidden');
+  function showPros(cat, emoji) {
+    document.getElementById('category-section').classList.add('hidden');
+    document.getElementById('pro-list-section').classList.remove('hidden');
     document.getElementById('cat-title').innerText = cat.toUpperCase();
     
     const anchor = document.getElementById('pro-anchor');
     anchor.innerHTML = '';
-    pakkujad[cat].forEach(p => {
-      const finalPrice = (p.hind * 1.08).toFixed(2);
+    
+    proData[cat].forEach(pro => {
+      const price = (pro.hind * 1.08).toFixed(2);
       anchor.innerHTML += `
         <div class="pro-card">
-          <div style="display:flex; align-items:center; gap:20px;">
-            <div style="width:60px; height:60px; background:var(--forest); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:30px; border:1px solid var(--gold);">${p.emoji}</div>
+          <div class="pro-info">
+            <div class="pro-avatar">${pro.emoji}</div>
             <div>
-              <div style="font-weight:700; font-size:18px;">${p.nimi}</div>
-              <div style="font-size:13px; color:var(--text-light);">📍 ${p.asukoht} · ⭐ ${p.hinnang} · ⏱️ ${p.kiir}</div>
+              <div style="font-weight:700; font-size:20px;">${pro.nimi}</div>
+              <div style="font-size:13px; color:var(--text-light); margin-top:5px;">📍 ${pro.asukoht} · ⭐ ${pro.hinnang} · ⏱️ Kohe saadaval</div>
             </div>
           </div>
           <div style="text-align:right;">
-            <div style="color:var(--gold); font-weight:800; font-size:24px;">${finalPrice}€/h</div>
-            <button class="btn" style="padding:8px 15px; font-size:12px; margin-top:5px;">VALI</button>
+            <div style="color:var(--gold); font-weight:800; font-size:26px;">${price}€/h</div>
+            <button class="btn" style="padding:10px 20px; font-size:12px; margin-top:10px;">Vali Ninja</button>
           </div>
         </div>`;
     });
   }
 
   function backToCats() {
-    document.getElementById('pro-area').classList.add('hidden');
-    document.getElementById('cat-selector').classList.remove('hidden');
+    document.getElementById('pro-list-section').classList.add('hidden');
+    document.getElementById('category-section').classList.remove('hidden');
   }
 
   function toggleTheme() {
