@@ -4,248 +4,104 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Koduninja — Euroopa teenuste platvorm</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-
 <style>
   :root {
-    --bg-main: #FDFCF9;
-    --bg-card: rgba(255, 255, 255, 0.94);
+    --bg-main: #0F1713;
+    --bg-card: rgba(24, 38, 32, 0.98);
     --forest: #1A3326;
-    --sage: #5C8A6E;
     --gold: #C9A84C;
-    --text: #2D3436; 
-    --text-light: #636E72;
-    --border: #EFEBE3;
-    --shadow: 0 10px 40px rgba(26,51,38,0.08);
+    --text: #EFEBE3;
+    --text-light: #A0AEC0;
+    --border: rgba(201, 168, 76, 0.15);
+    --shadow: 0 15px 45px rgba(0,0,0,0.4);
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
-
-  body { 
-    background-color: var(--bg-main); 
-    color: var(--text); 
+  body {
+    background-color: var(--bg-main);
+    color: var(--text);
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
     min-height: 100vh;
-    background-image: radial-gradient(circle at 2px 2px, var(--border) 1px, transparent 0);
+    background-image: radial-gradient(circle at 2px 2px, #1A3326 1px, transparent 0);
     background-size: 40px 40px;
   }
 
-  /* --- Sisselogimise ekraan --- */
-  #login-screen {
-    display: flex;
-    min-height: 100vh;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-
+  /* Login */
+  #login-screen { display: flex; min-height: 100vh; align-items: center; justify-content: center; padding: 20px; }
   .login-card {
-    background: var(--bg-card);
-    padding: 60px 40px;
-    border-radius: 40px;
-    box-shadow: var(--shadow);
-    width: 100%;
-    max-width: 450px;
-    border: 1px solid var(--border);
-    text-align: center;
-    backdrop-filter: blur(10px);
+    background: var(--bg-card); padding: 50px; border-radius: 35px;
+    box-shadow: var(--shadow); width: 100%; max-width: 420px;
+    border: 1px solid var(--border); text-align: center; backdrop-filter: blur(15px);
   }
 
-  h1 { 
-    font-family: 'Playfair Display', serif; 
-    font-size: 42px; 
-    color: var(--forest); 
-    margin-bottom: 10px;
-  }
-
-  .input-group { text-align: left; margin-bottom: 25px; }
-  .input-label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; color: var(--forest); }
+  /* Main Dashboard */
+  #main-content { display: none; padding: 40px 20px; max-width: 1100px; margin: 0 auto; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
   
-  .input-field {
-    width: 100%;
-    padding: 18px;
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    background: white;
-    font-size: 16px;
-    transition: all 0.3s;
+  /* Teenuste valik */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .category-card {
+    background: var(--bg-card); padding: 30px; border-radius: 25px;
+    border: 1px solid var(--border); cursor: pointer; text-align: center;
+    transition: 0.3s;
   }
+  .category-card:hover { border-color: var(--gold); transform: translateY(-5px); background: #1a2a22; }
+  .category-card span { font-size: 45px; display: block; margin-bottom: 15px; }
 
-  .input-field:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 4px rgba(201,168,76,0.1); }
+  /* SEE ON SEE OSA, MIS PILDIL OLI - PRO LIST */
+  .pro-card {
+    background: var(--bg-card); padding: 25px; border-radius: 20px;
+    border: 1px solid var(--border); margin-bottom: 15px;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: 0.3s;
+  }
+  .pro-card:hover { border-color: var(--gold); }
+  
+  .pro-info { display: flex; align-items: center; gap: 20px; }
+  .pro-emoji { width: 60px; height: 60px; background: #1A3326; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; border: 1px solid var(--gold); }
+  
+  .badge { font-size: 11px; background: var(--gold); color: var(--forest); padding: 2px 8px; border-radius: 10px; font-weight: 700; margin-left: 10px; }
 
   .btn-ninja {
-    width: 100%;
-    padding: 18px;
-    border-radius: 16px;
-    border: none;
-    background: var(--forest);
-    color: white;
-    font-weight: 700;
-    font-size: 18px;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(26,51,38,0.2);
+    width: 100%; padding: 18px; border-radius: 14px; border: none;
+    background: var(--gold); color: var(--forest); font-weight: 800;
+    cursor: pointer; text-transform: uppercase; letter-spacing: 1px; font-size: 15px;
   }
-
-  .btn-ninja:hover { background: var(--gold); transform: translateY(-2px); }
-
-  /* --- Dashboard --- */
-  #main-content { display: none; padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
-
-  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
-
-  .greeting-text h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--forest); }
-
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-
-  .service-card {
-    background: white;
-    padding: 40px;
-    border-radius: 30px;
-    border: 1px solid var(--border);
-    text-align: center;
-    transition: all 0.4s;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-  }
-
-  .service-card:hover { 
-    transform: translateY(-10px); 
-    border-color: var(--gold); 
-    box-shadow: 0 20px 40px rgba(201,168,76,0.1);
-  }
-
-  .service-card .icon { font-size: 50px; margin-bottom: 20px; display: block; }
-  .service-card h4 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 10px; }
-
-  .logout-link { color: var(--text-light); text-decoration: none; font-weight: 600; cursor: pointer; }
-  .logout-link:hover { color: var(--gold); }
 
   .hidden { display: none !important; }
-
-  /* Pro paneel */
-  .pro-banner {
-    background: var(--forest);
-    color: white;
-    padding: 40px;
-    border-radius: 30px;
-    margin-bottom: 40px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .pro-banner::after {
-    content: 'N';
-    position: absolute;
-    right: -20px;
-    bottom: -40px;
-    font-size: 200px;
-    font-family: 'Playfair Display';
-    opacity: 0.1;
-  }
+  h1, h2, h3 { font-family: 'Playfair Display', serif; }
 </style>
 </head>
 <body>
 
 <div id="login-screen">
   <div class="login-card">
-    <div style="font-size: 40px; margin-bottom: 15px;">🥷</div>
-    <h1>Koduninja</h1>
-    <p style="color: var(--text-light); margin-bottom: 40px;">Eksklusiivne teenuste platvorm</p>
-    
-    <div class="input-group">
-      <label class="input-label">E-mail</label>
-      <input id="email" class="input-field" type="email" value="klient@demo.ee">
-    </div>
-    
-    <div class="input-group">
-      <label class="input-label">Parool</label>
-      <input id="password" class="input-field" type="password" value="demo123">
-    </div>
-    
-    <button class="btn-ninja" onclick="handleLogin()">Sisene portaali</button>
-    <p id="err" style="color: #e74c3c; font-size: 14px; margin-top: 15px; display: none;">Sisselogimine ebaõnnestus!</p>
+    <h1 style="color: var(--gold); font-size: 40px;">Koduninja</h1>
+    <p style="color: var(--text-light); margin-bottom: 35px;">Eksklusiivne teenuste portaal</p>
+    <input id="email" style="width:100%; padding:16px; margin-bottom:15px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,0.03); color:white;" type="email" value="klient@demo.ee">
+    <input id="password" style="width:100%; padding:16px; margin-bottom:25px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,0.03); color:white;" type="password" value="demo123">
+    <button class="btn-ninja" onclick="handleLogin()">Sisene</button>
   </div>
 </div>
 
 <div id="main-content">
   <div class="header">
-    <div class="greeting-text">
-      <h2 id="welcome-name">Tere tulemast!</h2>
-      <p id="role-text" style="color: var(--gold); font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;"></p>
+    <div>
+      <h2 id="welcome" style="font-size: 36px; color: var(--gold);">Tere tulemast!</h2>
+      <p style="color: var(--text-light); text-transform: uppercase; font-size: 12px; letter-spacing: 2px;">Ninja Klient</p>
     </div>
-    <a class="logout-link" onclick="location.reload()">Logi välja</a>
+    <button onclick="location.reload()" style="background:none; border:1px solid var(--gold); color:var(--gold); padding:8px 20px; border-radius:10px; cursor:pointer;">Logi välja</button>
   </div>
 
-  <div id="view-klient" class="hidden">
-    <h3 style="margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 26px;">Kuidas saame täna kasulikud olla?</h3>
+  <div id="cat-view">
+    <h3 style="margin-bottom: 30px;">Vali vajalik teenus:</h3>
     <div class="grid">
-      <div class="service-card">
-        <span class="icon">🧹</span>
-        <h4>Koristus</h4>
-        <p style="color: var(--text-light);">Luksuslik puhtus sinu kodus</p>
-      </div>
-      <div class="service-card">
-        <span class="icon">🛠️</span>
-        <h4>Remont</h4>
-        <p style="color: var(--text-light);">Meistrid, keda usaldatakse</p>
-      </div>
-      <div class="service-card">
-        <span class="icon">🌿</span>
-        <h4>Aiatööd</h4>
-        <p style="color: var(--text-light);">Sinu roheline oaas</p>
-      </div>
+      <div class="category-card" onclick="showCategory('koristus')"><span>🧹</span><h4>Koristus</h4></div>
+      <div class="category-card" onclick="showCategory('ehitus')"><span>🛠️</span><h4>Remont</h4></div>
+      <div class="category-card" onclick="showCategory('transport')"><span>🚚</span><h4>Transport</h4></div>
     </div>
   </div>
 
-  <div id="view-tegija" class="hidden">
-    <div class="pro-banner">
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 32px;">Ninja Paneel</h3>
-        <p style="font-size: 18px; margin-top: 10px; opacity: 0.9;">Sul on 3 uut tööpakkumist ootel.</p>
-        <button class="btn-ninja" style="width: auto; margin-top: 20px; background: var(--gold); padding: 12px 30px;">Vaata töid</button>
-    </div>
-    <div class="grid">
-        <div class="service-card" style="text-align: left;">
-            <p style="color: var(--gold); font-weight: 700;">TÄNA 14:00</p>
-            <h4 style="margin-top: 5px;">Korteri koristus</h4>
-            <p>📍 Tallinn, Narva mnt</p>
-            <hr style="margin: 15px 0; border: 0; border-top: 1px solid var(--border);">
-            <p style="font-weight: 700; font-size: 20px;">Tasu: 65.00€</p>
-        </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Vana Kodo andmed
-  const users = {
-    'klient@demo.ee': { name: 'Mari Maasikas', role: 'klient', pass: 'demo123' },
-    'tegija@demo.ee': { name: 'Kalle Koduabi', role: 'tegija', pass: 'demo123' }
-  };
-
-  function handleLogin() {
-    const e = document.getElementById('email').value;
-    const p = document.getElementById('password').value;
-    const err = document.getElementById('err');
-
-    if (users[e] && users[e].pass === p) {
-      err.style.display = 'none';
-      document.getElementById('login-screen').style.display = 'none';
-      document.getElementById('main-content').style.display = 'block';
-      
-      document.getElementById('welcome-name').innerText = "Tere, " + users[e].name + "!";
-      document.getElementById('role-text').innerText = users[e].role === 'klient' ? "Eraisik" : "Teenusepakkuja";
-
-      if (users[e].role === 'klient') {
-        document.getElementById('view-klient').classList.remove('hidden');
-      } else {
-        document.getElementById('view-tegija').classList.remove('hidden');
-      }
-    } else {
-      err.style.display = 'block';
-    }
-  }
-</script>
-
-</body>
-</html>
+  <div id="pro-view" class="hidden">
+    <button onclick="backToCats()" style="background:none; border:none; color:var(--gold); cursor:pointer; margin-bottom:20px
