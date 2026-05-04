@@ -58,7 +58,6 @@
             align-items: center;
         }
 
-        /* 3. LOGIN KAART */
         .login-card {
             background: var(--bg-card);
             padding: 60px 50px;
@@ -80,15 +79,9 @@
             letter-spacing: -1px;
         }
 
-        body.dark-mode h1 {
-            color: var(--gold);
-        }
+        body.dark-mode h1 { color: var(--gold); }
 
-        /* 4. SISENDVÄLJAD */
-        .input-group {
-            text-align: left;
-            margin-bottom: 25px;
-        }
+        .input-group { text-align: left; margin-bottom: 25px; }
 
         .input-label {
             display: block;
@@ -111,12 +104,6 @@
             outline: none;
         }
 
-        .input-field:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 0 4px rgba(201,168,76,0.1);
-        }
-
-        /* 5. NUPUD */
         .btn {
             width: 100%;
             padding: 20px;
@@ -132,15 +119,7 @@
             box-shadow: 0 10px 20px rgba(26,51,38,0.2);
         }
 
-        body.dark-mode .btn {
-            background: var(--gold);
-            color: var(--forest);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(201,168,76,0.3);
-        }
+        body.dark-mode .btn { background: var(--gold); color: var(--forest); }
     </style>
 </head>
 <body>
@@ -149,19 +128,14 @@
         <h1>Koduninja</h1>
         <div class="input-group">
             <label class="input-label">Kasutaja</label>
-            <input type="text" class="input-field" placeholder="Sinu email">
+            <input type="text" class="input-field" placeholder="ninja@kodu.ee">
         </div>
         <div class="input-group">
             <label class="input-label">Parool</label>
             <input type="password" class="input-field" placeholder="••••••••">
         </div>
-        <button class="btn" onclick="toggleTheme()">Sisene portaali</button>
+        <button class="btn" onclick="document.body.classList.toggle('dark-mode')">Sisene portaali</button>
     </div>
 
-    <script>
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-        }
-    </script>
 </body>
 </html>
