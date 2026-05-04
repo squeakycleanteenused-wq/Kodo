@@ -4,19 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Koduninja — Euroopa teenuste platvorm</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- Kasutame Google Fondi importi, et hoida kood puhas ja vältida vigu -->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --forest: #1A3326;
     --gold: #C9A84C;
     --gold-light: #F0D898;
-    --shadow-lg: 0 8px 48px rgba(0,0,0,0.5);
+    --bg-dark: #0f1f1a;
+    --text-muted: #8a9a92;
+    --shadow: 0 8px 48px rgba(0,0,0,0.5);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'DM Sans', sans-serif; background: #0f1f1a; color: #ffffff; min-height: 100vh; }
+  body { font-family: 'Outfit', sans-serif; background: var(--bg-dark); color: #ffffff; min-height: 100vh; }
 
-  /* Päis */
+  /* PÄIS JA LOGO */
   .header {
     background: var(--forest);
     padding: 0 40px;
@@ -26,59 +29,70 @@
     box-shadow: 0 2px 20px rgba(0,0,0,0.5);
   }
   .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .logo-icon { width: 36px; height: 36px; background: var(--gold); border-radius: 10px; display:flex; align-items:center; justify-content:center; font-size:18px; }
+  .logo-icon { 
+    width: 36px; height: 36px; background: var(--gold); border-radius: 10px; 
+    display: flex; align-items: center; justify-content: center; font-size: 18px; 
+  }
   .logo-text { font-family: 'Playfair Display', serif; font-size: 20px; color: #F5F0E8; font-weight: 700; }
 
-  /* Login Vaade KORDUVA mustriga */
+  /* KORDUV RINGMUSTER TAUSTAL */
   .login-wrap {
     min-height: calc(100vh - 64px);
     display: flex; align-items: center; justify-content: center;
-    /* Muudetud: background-repeat on nüüd repeat ja size on 400px kordumise jaoks */
     background: 
       url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><g fill='none' stroke='%23ffffff' stroke-opacity='0.04' stroke-width='1'><circle cx='200' cy='200' r='30'/><circle cx='200' cy='200' r='60'/><circle cx='200' cy='200' r='90'/><circle cx='200' cy='200' r='120'/><circle cx='200' cy='200' r='150'/><circle cx='200' cy='200' r='180'/></g></svg>") repeat,
-      #0f1f1a;
+      var(--bg-dark);
     background-size: 400px 400px;
     padding: 20px;
   }
+
+  /* LOGIN KAST */
   .login-box {
     background: rgba(20, 40, 33, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 20px;
     backdrop-filter: blur(10px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow);
     padding: 56px;
     max-width: 440px; width: 100%;
     text-align: center;
     position: relative;
     z-index: 1;
   }
+
+  /* KESKNE NINJA LOGO */
   .logo-circle {
     width: 96px; height: 96px; border-radius: 50%;
     background: rgba(255, 255, 255, 0.06);
     margin: 0 auto 24px;
     display: flex; align-items: center; justify-content: center;
     font-size: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
-  h1 { font-family: 'Playfair Display', serif; font-size: 30px; color: #ffffff; margin-bottom: 8px; }
-  p { color: #8a9a92; font-size: 15px; margin-bottom: 32px; }
 
-  /* Vormi elemendid */
+  h1 { font-family: 'Playfair Display', serif; font-size: 30px; color: #ffffff; margin-bottom: 8px; }
+  p { color: var(--text-muted); font-size: 15px; margin-bottom: 32px; }
+
+  /* VORMID */
   .input-group { text-align: left; margin-bottom: 20px; }
-  label { font-size: 11px; font-weight: 700; color: #8a9a92; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; display: block; }
+  label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; display: block; }
   input {
     width: 100%; padding: 14px 18px; background: rgba(15, 31, 26, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
-    color: #ffffff; outline: none; font-size: 15px;
+    color: #ffffff; outline: none; font-size: 15px; font-family: 'Outfit', sans-serif;
   }
-  input:focus { border-color: var(--gold); }
+  input:focus { border-color: var(--gold); background: rgba(15, 31, 26, 0.9); }
+
   .btn-primary {
     width: 100%; padding: 16px; border-radius: 10px; border: none;
     background: var(--gold); color: #1a2922; font-weight: 700; font-size: 15px;
-    cursor: pointer; transition: 0.2s;
+    cursor: pointer; transition: 0.2s; font-family: 'Outfit', sans-serif;
+    text-transform: uppercase; letter-spacing: 1px;
   }
   .btn-primary:hover { background: #e0bc5e; transform: translateY(-1px); }
 
-  .signup-text { margin-top: 24px; color: #8a9a92; font-size: 14px; }
+  /* PUUDUOLNUD LINK */
+  .signup-text { margin-top: 24px; color: var(--text-muted); font-size: 14px; }
   .signup-link { color: var(--gold); font-weight: 700; cursor: pointer; text-decoration: none; }
   .signup-link:hover { text-decoration: underline; }
 </style>
@@ -97,14 +111,17 @@
     <div class="logo-circle">🥷</div>
     <h1>Tere tulemast</h1>
     <p>Sisene oma Koduninja kontole.</p>
+    
     <div class="input-group">
       <label>E-mail</label>
       <input type="email" placeholder="teie@email.ee">
     </div>
+    
     <div class="input-group">
       <label>Parool</label>
       <input type="password" placeholder="••••••••">
     </div>
+    
     <button class="btn-primary">Logi sisse →</button>
     
     <div class="signup-text">
