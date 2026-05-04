@@ -4,29 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Koduninja</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-main: #fdfcf9;
             --bg-gradient: radial-gradient(circle at 20% 30%, #ffffff 0%, #f7f3ed 50%, #efebe3 100%);
-            --bg-card: rgba(255, 255, 255, 0.8);
+            --bg-card: rgba(255, 255, 255, 0.9);
             --forest: #1A3326;
             --gold: #C9A84C;
             --text: #2D3436; 
-            --border: rgba(26, 51, 38, 0.1);
+            --border: rgba(26, 51, 38, 0.15);
             --shadow: 0 20px 60px rgba(26,51,38,0.1);
-            --ninja-logo-color: #1A3326; /* Valges režiimis roheline */
+            --ninja-logo-color: #1A3326;
         }
 
         body.dark-mode {
             --bg-main: #0a110e;
             --bg-gradient: radial-gradient(circle at 30% 20%, #1a3326 0%, #0f1713 45%, #050a08 100%);
-            --bg-card: rgba(26, 43, 35, 0.9); /* Tumedam ja kindlam põhi */
+            --bg-card: #14211a; /* Täiesti opaakne põhi, et ei sulanduks läbi */
             --gold: #D4B86A;
             --text: #F1F2F6;
-            --border: rgba(212, 184, 106, 0.2); /* Kuldne piirjoon definitsiooniks */
-            --shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 20px rgba(212, 184, 106, 0.05);
-            --ninja-logo-color: #D4B86A; /* Tumedas režiimis kuldne */
+            /* TUGEV DEFINITSIOON: Selge kuldne äär ja väline kuma */
+            --border: rgba(212, 184, 106, 0.4); 
+            --shadow: 0 0 40px rgba(0,0,0,0.9), 0 0 25px rgba(212, 184, 106, 0.15);
+            --ninja-logo-color: #D4B86A;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
@@ -40,10 +41,8 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
         }
 
-        /* TIHE RINGMUSTER */
         body::before {
             content: "";
             position: fixed;
@@ -58,12 +57,11 @@
         }
 
         .header {
-            background: rgba(26, 51, 38, 0.95);
+            background: #1A3326;
             padding: 0 40px;
             height: 70px;
             display: flex; align-items: center; justify-content: space-between;
             position: relative; z-index: 100;
-            backdrop-filter: blur(10px);
         }
 
         .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; }
@@ -79,52 +77,44 @@
             font-family: 'Outfit';
         }
 
-        .login-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; position: relative; z-index: 1; }
+        .login-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; z-index: 1; }
 
         .login-box {
             background: var(--bg-card);
-            backdrop-filter: blur(25px);
-            border-radius: 32px;
+            border-radius: 36px;
             padding: 60px;
             max-width: 480px; width: 100%;
             text-align: center;
+            /* TUGEVAD VARJUD JA PIIRJOON */
             box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .login-box:hover {
-            transform: translateY(-5px);
+            border: 1.5px solid var(--border);
         }
 
         .ninja-character {
             width: 100px; height: 100px;
             margin: 0 auto 30px;
-            background: rgba(139, 178, 153, 0.1);
+            background: rgba(139, 178, 153, 0.15);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
         }
 
         .login-title { font-size: 32px; margin-bottom: 8px; font-family: 'Playfair Display', serif; }
-        .login-sub { opacity: 0.7; font-size: 15px; margin-bottom: 32px; }
-
-        .input-group { margin-bottom: 20px; text-align: left; }
+        
+        .input-group { margin-bottom: 24px; text-align: left; }
         .input-label { font-size: 11px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; display: block; }
         
         .input-field {
-            width: 100%; padding: 16px 20px; border-radius: 14px;
-            background: rgba(255, 255, 255, 0.05); color: var(--text); outline: none;
+            width: 100%; padding: 16px 20px; border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03); color: var(--text); outline: none;
             border: 1px solid var(--border); font-family: 'Outfit';
         }
 
         .btn-primary {
             background: var(--gold); color: #1A3326;
-            padding: 18px; border-radius: 14px; font-weight: 700;
+            padding: 18px; border-radius: 16px; font-weight: 700;
             border: none; width: 100%; cursor: pointer;
             font-family: 'Outfit'; font-size: 16px;
-            transition: 0.2s;
         }
-        .btn-primary:hover { opacity: 0.9; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body class="dark-mode">
@@ -161,7 +151,7 @@
         </div>
 
         <h1 class="login-title">Tere tulemast</h1>
-        <p class="login-sub">Sisene oma Koduninja kontole.</p>
+        <p style="margin-bottom: 35px; opacity: 0.8;">Sisene oma Koduninja kontole.</p>
         
         <div class="input-group">
             <label class="input-label">Kasutajatunnus</label>
@@ -175,7 +165,7 @@
         
         <button class="btn-primary" onclick="alert('Sisselogimine aktiveeritud!')">Logi sisse →</button>
         
-        <p style="margin-top: 24px; font-size: 14px; opacity: 0.7;">
+        <p style="margin-top: 25px; font-size: 14px; opacity: 0.8;">
             Pole veel liitunud? <a href="#" style="color: var(--gold); font-weight: 700; text-decoration: none;">Hakka ninjaks</a>
         </p>
     </div>
