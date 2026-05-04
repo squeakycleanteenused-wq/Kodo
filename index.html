@@ -1,72 +1,18 @@
-<!DOCTYPE html>
-<html lang="et"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Koduninja</title>
-
 <style>
-  :root {
-    --bg-main: #fdfcf9;
-    --bg-gradient: radial-gradient(circle at 20% 30%, #ffffff 0%, #f7f3ed 50%, #efebe3 100%);
-    --bg-card: rgba(255, 255, 255, 0.75);
-    --forest: #1A3326;
-    --gold: #C9A84C;
-    --text: #2D3436; 
-    --ninja-logo-color: #1A3326;
-  }
+  /* ... (muu kood jääb samaks) ... */
 
+  /* Tume režiim - Täiustatud definitsiooniga */
   body.dark-mode {
     --bg-main: #0a110e;
     --bg-gradient: radial-gradient(circle at 30% 20%, #1a3326 0%, #0f1713 45%, #050a08 100%);
-    --bg-card: rgba(26, 43, 35, 0.65);
+    --bg-card: rgba(26, 43, 35, 0.85); /* Veidi tumedam põhi paremaks kontrastiks */
     --gold: #D4B86A;
     --text: #F1F2F6;
+    /* Lisa siia tugevam vari ja kuldne piirjoon */
+    --border: rgba(212, 184, 106, 0.15); 
+    --shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 20px rgba(212, 184, 106, 0.05);
     --ninja-logo-color: #D4B86A;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
-  
-  body { 
-    font-family: 'Outfit', sans-serif; 
-    background-color: var(--bg-main);
-    background-image: var(--bg-gradient);
-    background-attachment: fixed;
-    color: var(--text); 
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%231A3326' stroke-width='1.2' stroke-opacity='0.12'%3E%3Ccircle cx='200' cy='200' r='30'/%3E%3Ccircle cx='200' cy='200' r='60'/%3E%3Ccircle cx='200' cy='200' r='90'/%3E%3Ccircle cx='200' cy='200' r='120'/%3E%3Ccircle cx='200' cy='200' r='150'/%3E%3Ccircle cx='200' cy='200' r='180'/%3E%3Ccircle cx='200' cy='200' r='210'/%3E%3C/g%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .header {
-    background: rgba(26, 51, 38, 0.95);
-    padding: 0 40px;
-    height: 70px;
-    display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0; z-index: 100;
-  }
-
-  .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; }
-  .logo-text { font-size: 22px; color: #FDFCF9; font-weight: 700; }
-
-  .theme-toggle {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 12px;
-    cursor: pointer;
-  }
-
-  .login-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; z-index: 1; }
 
   .login-box {
     background: var(--bg-card);
@@ -75,78 +21,15 @@
     padding: 60px;
     max-width: 480px; width: 100%;
     text-align: center;
+    /* Definitsioon: vari ja piirjoon */
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .ninja-character { width: 100px; height: 100px; margin: 0 auto 30px; background: rgba(139, 178, 153, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-
-  .login-title { font-size: 32px; font-family: 'Playfair Display', serif; }
-
-  .input-group { margin-bottom: 20px; text-align: left; }
-  .input-label { font-size: 11px; font-weight: 700; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; display: block; }
-  .input-field { width: 100%; padding: 16px 20px; border-radius: 14px; background: rgba(255, 255, 255, 0.05); color: var(--text); outline: none; border: 1px solid rgba(0,0,0,0.1); }
-
-  .btn-primary { background: var(--gold); color: #1A3326; padding: 18px; border-radius: 14px; font-weight: 700; border: none; width: 100%; cursor: pointer; }
+  /* Pehme hõljumise efekt, et kast tunduks veelgi dünaamilisem */
+  .login-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 50px 120px rgba(0,0,0,0.9), 0 0 30px rgba(212, 184, 106, 0.08);
+  }
 </style>
-</head>
-<body class="dark-mode">
-
-<header class="header">
-  <a href="#" class="logo">
-    <div style="width: 42px; height: 42px; display:flex; align-items:center; justify-content:center;">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="48" fill="#C9A84C"></circle>
-        <path d="M25 40 C25 25, 75 25, 75 40 L75 55 C75 70, 25 70, 25 55 Z" fill="#1A3326"></path>
-        <rect x="35" y="45" width="30" height="8" rx="4" fill="#FDFCF9" opacity="0.9"></rect>
-        <circle cx="42" cy="49" r="2" fill="#1A3326"></circle>
-        <circle cx="58" cy="49" r="2" fill="#1A3326"></circle>
-      </svg>
-    </div>
-    <div>
-      <div class="logo-text">Koduninja</div>
-    </div>
-  </a>
-  <button class="theme-toggle" onclick="toggleTheme()">
-    <span id="theme-icon">☀️</span> <span id="theme-text">Hele režiim</span>
-  </button>
-</header>
-
-<div class="login-wrap">
-  <div class="login-box">
-    <div class="ninja-character">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 60px; height: 60px;">
-        <path d="M30 90 Q50 85 70 90 L65 70 Q50 65 35 70 Z" fill="var(--ninja-logo-color)"></path>
-        <circle cx="50" cy="45" r="25" fill="var(--ninja-logo-color)"></circle>
-        <path d="M32 40 Q50 35 68 40 Q68 50 50 50 Q32 50 32 40" fill="var(--bg-main)"></path>
-        <circle cx="43" cy="44" r="2" fill="var(--ninja-logo-color)"></circle>
-        <circle cx="57" cy="44" r="2" fill="var(--ninja-logo-color)"></circle>
-      </svg>
-    </div>
-
-    <h1 class="login-title">Tere tulemast</h1>
-    <p style="margin-bottom: 30px; opacity: 0.7;">Sisene oma Koduninja kontole.</p>
-    
-    <div class="input-group">
-      <label class="input-label">Kasutajatunnus</label>
-      <input class="input-field" type="email" placeholder="teie@email.ee">
-    </div>
-    
-    <div class="input-group">
-      <label class="input-label">Parool</label>
-      <input class="input-field" type="password" placeholder="••••••••">
-    </div>
-    
-    <button class="btn-primary" onclick="alert('Sisselogimine aktiveeritud!')">Logi sisse →</button>
-  </div>
-</div>
-
-<script>
-  function toggleTheme() {
-    const body = document.body;
-    body.classList.toggle('dark-mode');
-    const isDark = body.classList.contains('dark-mode');
-    document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
-    document.getElementById('theme-text').textContent = isDark ? 'Hele režiim' : 'Tume režiim';
-  }
-</script>
-
-</body></html>
